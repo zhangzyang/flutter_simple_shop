@@ -54,39 +54,6 @@ class _AppState extends State<App> {
     UserIndexHome()
   ];
 
-  //渲染某个菜单项
-  _popupMenuItem(String title, {String imagePath, IconData icon}) {
-    return PopupMenuItem(
-      child: Row(
-        children: <Widget>[
-          //判断是否使用图片路径还是图标
-          imagePath != null
-              ? Image.asset(
-                  imagePath,
-                  width: 32.0,
-                  height: 32.0,
-                )
-              : SizedBox(
-                  width: 32.0,
-                  height: 32.0,
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
-                  ),
-                ),
-          //显示菜单文本内容
-          Container(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: Text(
-              title,
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget loadingWidget() {
     return new Center(
       child: SpinKitCircle(
@@ -173,6 +140,7 @@ class _AppState extends State<App> {
         });
       }
     });
+    super.initState();
   }
 
   @override
@@ -213,13 +181,7 @@ class _AppState extends State<App> {
           }),
           items: [
             new BottomNavigationBarItem(
-                title: new Text(
-                  '首页',
-                  style: TextStyle(
-                      color: _currentIndex == 0
-                          ? Color.fromRGBO(253, 87, 92, 1.0)
-                          : Color.fromRGBO(102, 102, 102, 1.0)),
-                ),
+                label: "首页",
                 icon: _currentIndex == 0
                     ? Image.asset(
                         'assets/nav/home.png',
@@ -232,13 +194,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-                title: new Text(
-                  '9.9包邮',
-                  style: TextStyle(
-                      color: _currentIndex == 1
-                          ? Color.fromRGBO(253, 87, 92, 1.0)
-                          : Color.fromRGBO(102, 102, 102, 1.0)),
-                ),
+                label: "9.9包邮",
                 icon: _currentIndex == 1
                     ? Image.asset(
                         'assets/nav/jiujiu.png',
@@ -251,14 +207,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-                title: new Text(
-                  '分类',
-                  style: TextStyle(
-                      color: _currentIndex == 2
-                          ? Color.fromRGBO(253, 87, 92, 1.0)
-                          : Color.fromRGBO(102, 102, 102, 1.0)),
-                ),
-
+                label: "分类",
                 icon: _currentIndex == 2
                     ? Image.asset(
                         'assets/nav/fenlei.png',
@@ -271,13 +220,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-                title: new Text(
-                  '收藏',
-                  style: TextStyle(
-                      color: _currentIndex == 3
-                          ? Color.fromRGBO(253, 87, 92, 1.0)
-                          : Color.fromRGBO(102, 102, 102, 1.0)),
-                ),
+              label: "收藏",
                 icon: _currentIndex == 3
                     ? Image.asset(
                         'assets/nav/shoucang.png',
@@ -290,13 +233,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-                title: new Text(
-                  '我的',
-                  style: TextStyle(
-                      color: _currentIndex == 4
-                          ? Color.fromRGBO(253, 87, 92, 1.0)
-                          : Color.fromRGBO(102, 102, 102, 1.0)),
-                ),
+              label: "我的",
                 icon: _currentIndex == 4
                     ? Image.asset(
                         'assets/nav/my.png',

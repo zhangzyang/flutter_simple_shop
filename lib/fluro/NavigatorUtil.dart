@@ -1,4 +1,3 @@
-import 'package:demo1/app.dart';
 import 'package:flutter/material.dart';
 import './Application.dart';
 import '../util/fluro_convert_util.dart';
