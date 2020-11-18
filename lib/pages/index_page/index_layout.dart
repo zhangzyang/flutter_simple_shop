@@ -6,9 +6,10 @@ class IndexPublicLayout extends StatelessWidget {
   bool transparencyBg; //是否透明背景
   EdgeInsetsGeometry padding;
   EdgeInsetsGeometry margin;
+  BorderRadius borderRadius;
 
   IndexPublicLayout(
-      {this.child, this.transparencyBg, this.padding, this.margin});
+      {this.child, this.transparencyBg, this.padding, this.margin,this.borderRadius});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,8 @@ class IndexPublicLayout extends StatelessWidget {
     if (transparencyBg != null && transparencyBg) {
       return Container(
         decoration: _buildStyle(),
-        padding: padding == null ? EdgeInsets.only(top: 10.0) : EdgeInsets.zero,
-        margin: margin == null
-            ? EdgeInsets.only(top: 10, left: ScreenUtil().setWidth(50), right: ScreenUtil().setWidth(50))
-            : EdgeInsets.zero,
+        padding: padding ?? EdgeInsets.only(top: 10.0),
+        margin: margin?? EdgeInsets.only(top: 10, left: 50.w, right: 50.w),
         child: child,
       );
     }
@@ -41,7 +40,7 @@ class IndexPublicLayout extends StatelessWidget {
         color: transparencyBg != null && transparencyBg
             ? Colors.transparent
             : Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(10)),
         boxShadow: [
           BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.1),

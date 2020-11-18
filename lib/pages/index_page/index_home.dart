@@ -27,6 +27,7 @@ import './swiper.dart';
 import './ddq.dart';
 import 'component/hodgepodge_widget.dart';
 import 'grid_menu_list.dart';
+import 'index_carousel.dart';
 
 class IndexHome extends StatefulWidget {
   final ScrollController mController;
@@ -325,13 +326,14 @@ class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixi
             SizedBox(
               height: ScreenUtil().setHeight(20),
             ),
-            carouselISLoaded && carouselProviderModal.carousels.isNotEmpty
-                ? IndexTopSwiper(
-                    carouselProviderModal: this.carouselProviderModal,
-                    datum: cpm.carousels,
-                    height: carouselHeight,
-                  )
-                : _buildGJP()
+            IndexCarousel()
+            // carouselISLoaded && carouselProviderModal.carousels.isNotEmpty
+            //     ? IndexTopSwiper(
+            //         carouselProviderModal: this.carouselProviderModal,
+            //         datum: cpm.carousels,
+            //         height: carouselHeight,
+            //       )
+            //     : _buildGJP()
           ],
         ),
       ],

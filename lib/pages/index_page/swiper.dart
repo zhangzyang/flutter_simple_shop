@@ -10,7 +10,11 @@ import 'package:url_launcher/url_launcher.dart';
 import './index_layout.dart';
 import '../../modals/carouselData.dart';
 
-// 首页轮播图
+/// 2020年11月18日11:01:57
+/// 首页的轮播图
+/// v2.0
+/// 典典
+
 class IndexTopSwiper extends StatelessWidget {
   List<Datum> datum;
   int height;
