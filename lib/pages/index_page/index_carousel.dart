@@ -1,10 +1,13 @@
 import 'package:demo1/config/app_config.dart';
 import 'package:demo1/pages/index_page/model/index_carousel_item_model.dart';
+import 'package:demo1/provider/carousel_provider.dart';
 import 'package:demo1/widgets/extended_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:palette_generator/palette_generator.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'index_layout.dart';
@@ -54,7 +57,10 @@ class _IndexCarouselState extends State<IndexCarousel> {
             }
           },
           onIndexChanged: (index) {
-            Future.delayed(Duration(seconds: 0), () {});
+            Future.delayed(Duration(seconds: 0), () {
+              IndexCarouselItemModel item = _carouselList[index];
+              _updatePaletteGenerator(index, item.imageUrl);
+            });
           },
           itemBuilder: (BuildContext context, int index) {
             IndexCarouselItemModel item = _carouselList[index];
@@ -72,5 +78,15 @@ class _IndexCarouselState extends State<IndexCarousel> {
         ),
       ),
     );
+  }
+
+  Future<void> _updatePaletteGenerator(int index, String url) async {
+    PaletteGenerator paletteGenerator =
+        await PaletteGenerator.fromImageProvider(
+      NetworkImage(url),
+      maximumColorCount: 20,
+    );
+    Provider.of<CarouselProviderModal>(context, listen: false)
+        .onChange(index, color: paletteGenerator.dominantColor.color);
   }
 }

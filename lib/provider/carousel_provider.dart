@@ -23,12 +23,10 @@ class CarouselProviderModal with ChangeNotifier {
     });
   }
 
-  void onChange(index) {
-    if (this.carousels.isNotEmpty) {
+  void onChange(index,{Color color,bool }) {
       this.showCur = index;
-      this.curColor = getColor(this.carousels[index].remark);
+      this.curColor = color ?? getColor(this.carousels[index].remark);
       notifyListeners();
-    }
   }
 
   Color getColor(String rgb) {
