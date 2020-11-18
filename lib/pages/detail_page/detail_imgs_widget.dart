@@ -25,8 +25,8 @@ class DetailImagesWidget extends StatelessWidget {
               direction: Axis.horizontal,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                DetailSimpleBorderButton(text: "详情", is_current: true),
-                DetailSimpleBorderButton(text: "推荐", is_current: false)
+                DetailSimpleBorderButton(text: "详情", isCurrent: true),
+                DetailSimpleBorderButton(text: "推荐", isCurrent: false)
               ],
             ),
           ),

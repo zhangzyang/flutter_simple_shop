@@ -8,8 +8,8 @@ import '../../fluro/NavigatorUtil.dart';
 
 // 9.9商品卡片布局
 class GoodsItem extends StatelessWidget {
-  DdqGoodsListItem goodsItem;
-  int state;
+  final DdqGoodsListItem goodsItem;
+  final int state;
 
   GoodsItem({@required this.goodsItem, this.state});
 

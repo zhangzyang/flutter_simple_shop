@@ -1,7 +1,6 @@
 import 'package:demo1/config/app_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'grid_menu.dart';
 import 'model/index_grid_menu_item_model.dart';
 

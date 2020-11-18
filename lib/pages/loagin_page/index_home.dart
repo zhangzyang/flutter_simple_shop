@@ -164,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
         if (value.isEmpty) {
           return '请输入密码';
         }
+        return value;
       },
       decoration: InputDecoration(
           labelText: 'Password',
@@ -194,6 +195,7 @@ class _LoginPageState extends State<LoginPage> {
         if (!emailReg.hasMatch(value)) {
           return '请输入正确的邮箱地址';
         }
+        return value;
       },
       onSaved: (String value) => _email = value,
     );

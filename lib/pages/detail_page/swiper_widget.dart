@@ -1,19 +1,17 @@
 import 'package:demo1/provider/goods_detail_provider.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/extended_image.dart';
 
 class SwiperWidget extends StatelessWidget {
-  String images;
-  GoodsDetailProvider goodsDetailProvider;
+  final String images;
+  final GoodsDetailProvider goodsDetailProvider;
   SwiperWidget({this.images,this.goodsDetailProvider});
-
-  List<String> imgArr;
 
   @override
   Widget build(BuildContext context) {
+    List<String> imgArr;
     if (images != null && images != "") {
       imgArr = images.split(",");
       return Stack(
@@ -62,15 +60,5 @@ class SwiperWidget extends StatelessWidget {
       );
     }
     return Container();
-  }
-
-  ExtendedImage buildExtendedImage(int index) {
-    return ExtendedImage.network(
-      imgArr[index],
-      fit: BoxFit.fill,
-      cache: true,
-      border: Border.all(color: Colors.red, width: 1.0),
-      borderRadius: BorderRadius.all(Radius.circular(30.0)),
-    );
   }
 }

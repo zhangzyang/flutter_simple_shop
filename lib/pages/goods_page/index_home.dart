@@ -22,11 +22,11 @@ import '../../repository/GoodsListRepository.dart';
 ///
 
 class GoodsListPage extends StatefulWidget {
-  String subcid;
-  String cids;
-  String brand;
-  String title;
-  String showCates; // 是否显示分类选择
+  final String subcid;
+  final String cids;
+  final String brand;
+  final String title;
+  final  String showCates; // 是否显示分类选择
   GoodsListPage(
       {this.subcid, this.cids, this.brand, this.title, this.showCates = "0"});
 
@@ -267,6 +267,7 @@ class _GoodsListPageState extends State<GoodsListPage>
       currentSubCategory = widget.subcid!=null ? widget.subcid : '';
       currentMainCategory = widget.cids;
     });
+    super.initState();
   }
 
   @override
@@ -330,7 +331,7 @@ class _GoodsListPageState extends State<GoodsListPage>
           cids: currentMainCategory,
           brand: widget.brand,
           subcid: currentSubCategory,
-          g_sort: "${index}");
+          g_sort: "$index");
       this.goodsListRepository.refresh(true);
       setState(() {
         priceSortType = 0;
@@ -357,7 +358,7 @@ class _GoodsListPageState extends State<GoodsListPage>
           cids: currentMainCategory,
           brand: widget.brand,
           subcid: currentSubCategory,
-          g_sort: "${index}");
+          g_sort: "$index");
       this.goodsListRepository.refresh(true);
     }
   }
@@ -382,12 +383,12 @@ class _GoodsListPageState extends State<GoodsListPage>
     //    print("------------");
     var offset = info?.dragOffset ?? 0.0;
     var mode = info?.mode;
-    Widget refreshWiget = Container();
+    // Widget refreshWiget = Container();
     //it should more than 18, so that RefreshProgressIndicator can be shown fully
     if (info?.refreshWiget != null &&
         offset > 18.0 &&
         mode != RefreshIndicatorMode.error) {
-      refreshWiget = info.refreshWiget;
+      // refreshWiget = info.refreshWiget;
     }
 
     Widget child;
@@ -440,7 +441,7 @@ class _GoodsListPageState extends State<GoodsListPage>
               color: Colors.transparent,
               alignment: Alignment.center,
               child: Text(
-                "${modeStr}" ?? "",
+                "$modeStr" ?? "",
                 style: TextStyle(
                     fontSize: ScreenUtil().setSp(50),
                     inherit: false,

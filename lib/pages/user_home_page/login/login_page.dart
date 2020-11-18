@@ -204,5 +204,6 @@ class _UserLoginPageState extends State<UserLoginPage> {
     if(this.userProvider!=userProvider){
       this.userProvider = userProvider;
     }
+    super.didChangeDependencies();
   }
 }

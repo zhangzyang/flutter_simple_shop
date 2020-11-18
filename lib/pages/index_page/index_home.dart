@@ -23,7 +23,6 @@ import 'package:flutter/widgets.dart' hide NestedScrollView;
 import 'package:shimmer/shimmer.dart';
 import '../../provider/carousel_provider.dart';
 import '../../provider/dtk_index_goods_provider.dart';
-import './swiper.dart';
 import './ddq.dart';
 import 'component/hodgepodge_widget.dart';
 import 'grid_menu_list.dart';
@@ -38,7 +37,7 @@ class IndexHome extends StatefulWidget {
   _IndexHomeState createState() => _IndexHomeState();
 }
 
-class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixin, TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
+class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
 //   状态管理
   CarouselProviderModal carouselProviderModal;
   DtkIndexGoodsModal dtkIndexGoodsModal;
@@ -220,10 +219,6 @@ class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixi
     super.dispose();
     indexGoodsRepository.dispose();
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 
   Future<void> loadDatas({CarouselProviderModal carouselProviderModal, DtkIndexGoodsModal dtkIndexGoodsModal, CategoryProvider categoryProvider}) async {
     if (carouselProviderModal != this.carouselProviderModal) {

@@ -5,8 +5,8 @@ import './goods_item_widget.dart';
 
 class GoodsListWidget extends StatelessWidget {
 
-  List<NineGoodsItem> list;
-  bool isInitLoading;
+  final List<NineGoodsItem> list;
+  final bool isInitLoading;
   GoodsListWidget({@required this.list,this.isInitLoading});
 
   @override

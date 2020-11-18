@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './app_bar_widget.dart';
 import './goods_item.dart';
-import '../../modals/ddq_modal.dart';
-import '../../widgets/up_down_btn_widget.dart';
 import './sliver_app_bar_delegate.dart';
 import '../../widgets/ddq_times_widget.dart';
 

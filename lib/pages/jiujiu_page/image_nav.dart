@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 
 class ImageNav extends StatelessWidget {
-  Text title;
-  Text subTitle;
-  String src;
-  dynamic onTap;
-  int width;
-  int height;
+  final Text title;
+  final Text subTitle;
+  final String src;
+  final dynamic onTap;
+  final int width;
+  final int height;
 
   ImageNav({this.title, this.subTitle, this.src, this.onTap,this.width,this.height});
 

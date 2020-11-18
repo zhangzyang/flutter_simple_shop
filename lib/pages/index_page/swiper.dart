@@ -1,7 +1,5 @@
 import 'package:demo1/provider/carousel_provider.dart';
-import 'package:demo1/util/image_util.dart';
 import 'package:demo1/widgets/extended_image.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -16,9 +14,9 @@ import '../../modals/carouselData.dart';
 /// 典典
 
 class IndexTopSwiper extends StatelessWidget {
-  List<Datum> datum;
-  int height;
-  CarouselProviderModal carouselProviderModal;
+  final List<Datum> datum;
+  final int height;
+  final CarouselProviderModal carouselProviderModal;
 
   IndexTopSwiper({this.datum, this.carouselProviderModal,this.height});
 

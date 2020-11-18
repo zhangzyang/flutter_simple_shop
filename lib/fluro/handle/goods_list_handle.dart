@@ -2,7 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import '../../pages/goods_page/index_home.dart';
 
-var GoodsListHandle = Handler(
+var goodsListHandle = Handler(
     handlerFunc: (BuildContext bc, Map<String, List<String>> params) {
       String subcid = params["subcid"]?.first;
       String cids = params["cids"]?.first;

@@ -218,5 +218,6 @@ class _IndexState extends State<FavoriteIndexHome> {
     if (this.goodsDetailProvider != goodsDetailProvider) {
       this.goodsDetailProvider = goodsDetailProvider;
     }
+    super.didChangeDependencies();
   }
 }

@@ -259,5 +259,6 @@ class _AppState extends State<App> {
       this.userProvider = userProvider;
       userProvider.loadUserInfo();
     }
+    super.didChangeDependencies();
   }
 }

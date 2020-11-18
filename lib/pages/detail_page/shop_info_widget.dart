@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../modals/GoodsInfo.dart';
 
 class ShopInfoWidget extends StatelessWidget {
-  GoodsDetail goodsInfo;
+  final GoodsDetail goodsInfo;
 
   ShopInfoWidget({this.goodsInfo});
 

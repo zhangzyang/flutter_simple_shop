@@ -1,5 +1,4 @@
 import 'package:demo1/pages/index_page/model/index_grid_menu_item_model.dart';
-import 'package:demo1/widgets/extended_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';

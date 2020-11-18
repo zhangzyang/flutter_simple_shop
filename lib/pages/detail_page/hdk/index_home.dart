@@ -29,9 +29,9 @@ import 'package:luhenchang_plugin/time/data_time_utils/data_time.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HaoDanKuDetailItem extends StatefulWidget {
-  String goods_id;
+final   String goodsId;
 
-  HaoDanKuDetailItem({this.goods_id});
+  HaoDanKuDetailItem({this.goodsId});
 
   @override
   _HaoDanKuDetailItemState createState() => _HaoDanKuDetailItemState();
@@ -1013,7 +1013,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
   }
 
   Future<String> initDatas() async {
-    await getHaodankuDetailInfo(widget.goods_id).then((res) {
+    await getHaodankuDetailInfo(widget.goodsId).then((res) {
       Result result = Result.fromJson(json.decode(res.toString()));
       if (result.code == 200) {
         HdkGoodsDetailModel hdkGoodsDetailModel =
@@ -1046,7 +1046,6 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _scrollController.dispose();
   }

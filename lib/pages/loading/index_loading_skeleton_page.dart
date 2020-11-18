@@ -1,4 +1,3 @@
-import 'package:demo1/widgets/component/custom_skeleton_container.dart';
 import 'package:demo1/widgets/component/custom_skeleton_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

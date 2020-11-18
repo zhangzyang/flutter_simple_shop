@@ -365,7 +365,7 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
           style: TextStyle(fontSize: ScreenUtil().setSp(40), color: Colors.red)
         ),
         TextSpan(
-          text: "${price}",
+          text: "$price",
           style: TextStyle(fontSize: ScreenUtil().setSp(50), color: Colors.red)
         )
       ],
@@ -459,7 +459,7 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
             dataModel = indexGridSpecialDataModel;
           });
         } catch (e, stack) {
-          print("报错信息:${e},${stack}");
+          print("报错信息:$e,$stack");
         }
       } else {
         SystemToast.show(result.msg);

@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../provider/goods_detail_provider.dart';
-import '../../modals/GoodsInfo.dart';
 
 //小部件
 import './swiper_widget.dart';
@@ -423,15 +421,15 @@ class _DetailIndexState extends State<DetailIndex> {
     return str;
   }
 
-  // 佣金计算
-  double _getCommissionNum() {
-    GoodsDetail goodsItem = goodsDetailProvider.goodInfo;
-    double rate = goodsItem.commissionRate;
-    double jiner = goodsItem.actualPrice * (rate / 100); // 实际获得金额
-    // 给用户的佣金
-    double userJiner = jiner * 0.7;
-    return userJiner;
-  }
+  // // 佣金计算
+  // double _getCommissionNum() {
+  //   GoodsDetail goodsItem = goodsDetailProvider.goodInfo;
+  //   double rate = goodsItem.commissionRate;
+  //   double jiner = goodsItem.actualPrice * (rate / 100); // 实际获得金额
+  //   // 给用户的佣金
+  //   double userJiner = jiner * 0.7;
+  //   return userJiner;
+  // }
 
   Widget _imgSwiper(String images,GoodsDetailProvider goodsDetailProvider) {
     if (images != null && images != "") {
@@ -471,5 +469,6 @@ class _DetailIndexState extends State<DetailIndex> {
     if (this.userProvider != userProvider) {
       this.userProvider = userProvider;
     }
+    super.didChangeDependencies();
   }
 }

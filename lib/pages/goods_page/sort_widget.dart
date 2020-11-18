@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SortWidget extends StatelessWidget {
 
-  dynamic onTap;
-  String title;
-  bool current;
-  Widget icon;
+  final dynamic onTap;
+  final String title;
+  final bool current;
+  final Widget icon;
 
   SortWidget({this.onTap, this.title, this.current,this.icon}); //是否选中状态
 

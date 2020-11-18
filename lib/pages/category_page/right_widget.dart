@@ -5,8 +5,8 @@ import '../../fluro/NavigatorUtil.dart';
 
 class RightWidgetItme extends StatelessWidget {
 
-  Subcategory item;
-  String cid;
+  final Subcategory item;
+  final String cid;
   RightWidgetItme({this.item,this.cid});
 
   @override

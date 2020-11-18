@@ -12,10 +12,10 @@ import '../../modals/favorites_model.dart';
 
 // 收藏商品列表卡片布局
 class FavoriteGoodsItem extends StatelessWidget {
-  Good good;
-  bool isShowEditIcon; //是否显示选中按钮
-  List<String> selectListIds;
-  UserProvider userProvider;
+  final Good good;
+  final bool isShowEditIcon; //是否显示选中按钮
+  final List<String> selectListIds;
+  final UserProvider userProvider;
   FavoriteGoodsItem({@required this.good, this.isShowEditIcon,this.selectListIds,this.userProvider});
 
   @override

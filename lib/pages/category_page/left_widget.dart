@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../modals/dtkCategorys.dart';
 
 class LeftWidgetItem extends StatelessWidget {
-  CategoryItem item;
-  bool is_current;
+  final CategoryItem item;
+  final bool isCurrent;
 
-  LeftWidgetItem({this.item, this.is_current});
+  LeftWidgetItem({this.item, this.isCurrent});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,10 @@ class LeftWidgetItem extends StatelessWidget {
       height: ScreenUtil().setHeight(150),
       alignment: Alignment.center,
       decoration:
-          BoxDecoration(color: is_current ? Colors.white : Color.fromRGBO(248, 248, 248, 1.0)),
+          BoxDecoration(color: isCurrent ? Colors.white : Color.fromRGBO(248, 248, 248, 1.0)),
       child: Text(
         item.cname,
-        style: TextStyle(color: is_current ? Colors.pinkAccent : Colors.black),
+        style: TextStyle(color: isCurrent ? Colors.pinkAccent : Colors.black),
       ),
     );
   }

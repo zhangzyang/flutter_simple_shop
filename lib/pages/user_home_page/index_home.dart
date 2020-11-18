@@ -115,12 +115,6 @@ class _IndexHomeState extends State<UserIndexHome> {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text("我的"),
-      centerTitle: true,
-    );
-  }
 
   Widget _buildHeaderWidget() {
     Widget widget = HeaderIndex(userProvider.user);
@@ -135,5 +129,6 @@ class _IndexHomeState extends State<UserIndexHome> {
       this.userProvider = userProvider;
       this.userProvider.loadUserInfo();
     }
+    super.didChangeDependencies();
   }
 }

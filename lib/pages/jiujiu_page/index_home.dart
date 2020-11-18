@@ -18,7 +18,7 @@ import 'menu_data.dart';
 
 // 9.9包邮专区
 class JiujiuIndexHome extends StatefulWidget {
-  ScrollController scrollController;
+  final ScrollController scrollController;
 
   JiujiuIndexHome({this.scrollController});
 
@@ -63,6 +63,7 @@ class _JiujiuIndexHomeState extends State<JiujiuIndexHome>
   void initState() {
     this.jiuJiuRepository = JiuJiuRepository("-1");
     this.tabController = TabController(length: menu_text.length, vsync: this);
+    super.initState();
   }
 
   @override

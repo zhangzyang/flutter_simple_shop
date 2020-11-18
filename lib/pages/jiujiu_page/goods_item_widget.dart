@@ -9,7 +9,7 @@ import '../../fluro/NavigatorUtil.dart';
 
 // 9.9商品卡片布局
 class GoodsItemWidget extends StatelessWidget {
-  NineGoodsItem goodsItem;
+  final NineGoodsItem goodsItem;
 
   GoodsItemWidget({@required this.goodsItem});
 
