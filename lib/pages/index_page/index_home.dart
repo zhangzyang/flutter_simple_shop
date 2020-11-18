@@ -271,6 +271,7 @@ class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixi
         // 下拉刷新指示头
         PullToRefreshContainer(buildPulltoRefreshHeader),
 
+        // 网格菜单
         SliverToBoxAdapter(
           child: GridMenuList(),
         ),

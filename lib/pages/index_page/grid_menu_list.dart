@@ -34,9 +34,9 @@ class _GridMenuListState extends State<GridMenuList> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 50.w),
+    return Container(
       child: GridView.count(
+          padding: EdgeInsets.zero,
           crossAxisCount: rowCount,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
