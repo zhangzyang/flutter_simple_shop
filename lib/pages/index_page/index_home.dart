@@ -228,7 +228,7 @@ class _IndexHomeState extends State<IndexHome> with AutomaticKeepAliveClientMixi
   Future<void> loadDatas({CarouselProviderModal carouselProviderModal, DtkIndexGoodsModal dtkIndexGoodsModal, CategoryProvider categoryProvider}) async {
     if (carouselProviderModal != this.carouselProviderModal) {
       this.carouselProviderModal = carouselProviderModal;
-      await carouselProviderModal.getCarousel();
+      // await carouselProviderModal.getCarousel();
       setState(() {
         carouselISLoaded = true;
       });
