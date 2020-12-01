@@ -28,6 +28,7 @@ import '../../provider/dtk_index_goods_provider.dart';
 import './ddq.dart';
 import 'component/category_component.dart';
 import 'component/hodgepodge_widget.dart';
+import 'component/topic_carousel.dart';
 import 'grid_menu_list.dart';
 import 'index_carousel.dart';
 
@@ -216,7 +217,7 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
           delegate: IndexFlexdHeaderWidget(child: [
             _buildAppbar(),
             CategoryComponent(),
-          ], color: _carouselProviderModal.curColor),
+          ], color: _indexProvider.topBackground),
           floating: true,
           pinned: true,
         ),
@@ -277,14 +278,14 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
             child: AnimatedContainer(
               duration: Duration(milliseconds: 1000),
               height: ScreenUtil().setHeight(carouselHeight + 50),
-              color: carouselISLoaded ? cpm.curColor : Colors.white,
+              color: _indexProvider.topBackground,
             )),
         Column(
           children: <Widget>[
             SizedBox(
               height: ScreenUtil().setHeight(20),
             ),
-            IndexCarousel()
+            IndexTopicComponentCarousel()
             // carouselISLoaded && carouselProviderModal.carousels.isNotEmpty
             //     ? IndexTopSwiper(
             //         carouselProviderModal: this.carouselProviderModal,
