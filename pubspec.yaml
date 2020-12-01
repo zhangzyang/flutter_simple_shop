@@ -47,6 +47,8 @@ dependencies:
 #  flutter_alibc: ^0.0.15 # 淘宝登录
   after_layout: ^1.0.7+2
   palette_generator: ^0.2.3
+  crypto: ^2.1.5
+  encrypt: ^4.1.0
 
 dev_dependencies:
   flutter_test:
