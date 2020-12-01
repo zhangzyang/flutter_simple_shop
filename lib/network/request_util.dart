@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:demo1/util/request_params_util.dart';
+import 'file:///D:/shop/flutter_simple_shop-master/lib/network/request_params_util.dart';
 import 'aes_util.dart';
 
 /// 加密请求工具类
