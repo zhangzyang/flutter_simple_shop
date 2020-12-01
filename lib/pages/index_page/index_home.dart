@@ -4,7 +4,9 @@ import 'package:after_layout/after_layout.dart';
 import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/modals/dtkCategorys.dart';
 import 'package:demo1/modals/goods_list_modal.dart';
+import 'package:demo1/pages/index_page/store/component_index.dart';
 import 'package:demo1/provider/category_provider.dart';
+import 'package:demo1/provider/index_provider.dart';
 import 'package:demo1/repository/IndexGoodsRepository.dart';
 import 'package:demo1/widgets/RoundUnderlineTabIndicator.dart';
 import 'package:demo1/widgets/component/custom_select_toolbar.dart';
@@ -24,6 +26,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../provider/carousel_provider.dart';
 import '../../provider/dtk_index_goods_provider.dart';
 import './ddq.dart';
+import 'component/category_component.dart';
 import 'component/hodgepodge_widget.dart';
 import 'grid_menu_list.dart';
 import 'index_carousel.dart';
@@ -37,11 +40,12 @@ class IndexHome extends StatefulWidget {
   _IndexHomeState createState() => _IndexHomeState();
 }
 
-class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
+class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
 //   状态管理
-  CarouselProviderModal carouselProviderModal;
-  DtkIndexGoodsModal dtkIndexGoodsModal;
-  CategoryProvider categoryProvider;
+  CarouselProviderModal _carouselProviderModal;
+  DtkIndexGoodsModal _dtkIndexGoodsModal;
+  CategoryProvider _categoryProvider;
+  IndexProvider _indexProvider;
   List<CategoryItem> categorys = [];
   GlobalKey _titleKey = GlobalKey();
 
@@ -87,41 +91,9 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
     );
   }
 
-  Widget _tabs() {
-    List<Tab> tabsItem = categorys.map((item) {
-      return Tab(text: item.cname);
-    }).toList();
-    tabsItem.insert(
-        0,
-        Tab(
-          text: "首页",
-        ));
-    return Container(
-      height: ScreenUtil().setHeight(100),
-      child: TabBar(
-        unselectedLabelColor: Colors.white60,
-        labelColor: Colors.white,
-        isScrollable: true,
-        onTap: (index) {
-          if (index > 0) {
-            NavigatorUtil.gotoGoodslistPage(context, showCates: "1", cids: categorys[index - 1].cid.toString(), title: categorys[index - 1].cname);
-          }
-        },
-        indicator: RoundUnderlineTabIndicator(
-            insets: EdgeInsets.only(bottom: 3),
-            borderSide: BorderSide(
-              width: 2,
-              color: Colors.white,
-            )),
-        controller: tabController,
-        tabs: categorys.length != 0 ? tabsItem : [],
-      ),
-    );
-  }
-
   // 轮播图股架屏
   Widget _buildGJP() {
-    if (carouselProviderModal.carousels.isEmpty && carouselISLoaded) {
+    if (_carouselProviderModal.carousels.isEmpty && carouselISLoaded) {
       return Container(
         height: 480.h,
         width: MediaQuery.of(context).size.width,
@@ -208,41 +180,31 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    final carouselProviderModal = Provider.of<CarouselProviderModal>(context);
-    final dtkIndexGoodsModal = Provider.of<DtkIndexGoodsModal>(context);
-    final categoryProvider = Provider.of<CategoryProvider>(context);
-    await loadDatas(carouselProviderModal: carouselProviderModal, dtkIndexGoodsModal: dtkIndexGoodsModal, categoryProvider: categoryProvider);
+    if (this._carouselProviderModal == null) this._carouselProviderModal = Provider.of<CarouselProviderModal>(context);
+    if (this._dtkIndexGoodsModal == null) this._dtkIndexGoodsModal = Provider.of<DtkIndexGoodsModal>(context);
+    if (this._categoryProvider == null) this._categoryProvider = Provider.of<CategoryProvider>(context);
+    if (this._indexProvider == null) this._indexProvider = Provider.of<IndexProvider>(context);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    indexGoodsRepository.dispose();
-  }
+  /// 初始化数据
+  /// 从上往下顺序加载
+  Future<void> _initDatas() async {
+    await _indexProvider.fetchCategorys(); // 超级菜单
+    await _indexProvider.fetchTopics(); // 专辑列表
 
-  Future<void> loadDatas({CarouselProviderModal carouselProviderModal, DtkIndexGoodsModal dtkIndexGoodsModal, CategoryProvider categoryProvider}) async {
-    if (carouselProviderModal != this.carouselProviderModal) {
-      this.carouselProviderModal = carouselProviderModal;
-      // await carouselProviderModal.getCarousel();
+    await _carouselProviderModal.getCarousel(); // 轮播图
+    setState(() {
+      carouselISLoaded = true;
+    });
+    await _dtkIndexGoodsModal.getGoodsList(1); // 首页商品列表
+    await _categoryProvider.loadDtkCategoryDatas(context); // 分类数据
+    setState(() {
+      this.categorys = _categoryProvider.categorys;
+      tabController = TabController(length: this.categorys.length + 1, vsync: this);
       setState(() {
-        carouselISLoaded = true;
+        categortListIsLoaded = true;
       });
-    }
-    if (dtkIndexGoodsModal != this.dtkIndexGoodsModal) {
-      this.dtkIndexGoodsModal = dtkIndexGoodsModal;
-      await dtkIndexGoodsModal.getGoodsList(1);
-    }
-    if (this.categoryProvider != categoryProvider) {
-      this.categoryProvider = categoryProvider;
-      await categoryProvider.loadDtkCategoryDatas(context);
-      setState(() {
-        this.categorys = categoryProvider.categorys;
-        tabController = TabController(length: this.categorys.length + 1, vsync: this);
-        setState(() {
-          categortListIsLoaded = true;
-        });
-      });
-    }
+    });
   }
 
   // body
@@ -253,8 +215,8 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
         SliverPersistentHeader(
           delegate: IndexFlexdHeaderWidget(child: [
             _buildAppbar(),
-            _buildCategoryTabbar(),
-          ], color: carouselProviderModal.curColor),
+            CategoryComponent(),
+          ], color: _carouselProviderModal.curColor),
           floating: true,
           pinned: true,
         ),
@@ -276,6 +238,9 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
         SliverToBoxAdapter(
           child: DDQWidget(),
         ),
+        SliverToBoxAdapter(
+          child: StoreComponentIndex(),
+        ),
 
         SliverToBoxAdapter(
           child: HodgepodgeWidget(),
@@ -289,9 +254,7 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
               child: AnimatedContainer(
                 key: _titleKey,
                 duration: Duration(milliseconds: 300),
-                decoration: BoxDecoration(
-                    color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1),
-                    boxShadow: _titleIsInTop ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))] : []),
+                decoration: BoxDecoration(color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1), boxShadow: _titleIsInTop ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))] : []),
                 child: CustomSelectToolbar(items: [
                   SelectMenu(title: "佛系推荐", subTitle: '发现好物'),
                   SelectMenu(title: "精选", subTitle: '猜你喜欢'),
@@ -333,10 +296,6 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
         ),
       ],
     );
-  }
-
-  Widget _buildCategoryTabbar() {
-    return carouselISLoaded && categortListIsLoaded ? _tabs() : _buildTabShimmer();
   }
 
   Widget _buildAppbar() {
@@ -423,5 +382,6 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
   void afterFirstLayout(BuildContext context) {
     _titleLocationHandler();
     _addMainScrollListening();
+    _initDatas();
   }
 }

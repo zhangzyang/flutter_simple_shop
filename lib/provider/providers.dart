@@ -1,3 +1,4 @@
+import 'package:demo1/provider/index_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:nested/nested.dart';
 
@@ -24,4 +25,5 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider<GoodsListProvider>(create: (_) => GoodsListProvider()),
   ChangeNotifierProvider<DdqProvider>(create: (_)=>DdqProvider()),
   ChangeNotifierProvider<UserProvider>(create: (_)=>UserProvider()),
+  ChangeNotifierProvider<IndexProvider>(create: (_)=>IndexProvider()),
 ];

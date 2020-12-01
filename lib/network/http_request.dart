@@ -14,7 +14,7 @@ import 'dio_errors.dart';
 class HttpRequest {
   static Dio dio;
 
-  static const String HOST = "http://localhost:8089/tkapi";
+  static const String HOST = "http://192.168.199.118:8089/tkapi";
 
   /// 网络请求超时时间 10秒
   /// 注意超过十秒钟服务器可能不会 返回正确数据!
@@ -78,7 +78,7 @@ class HttpRequest {
           break;
       }
       if (response != null) {
-        Result result = resultFromJson(response.data);
+        Result result = Result.fromJson(response.data);
         if(result.state==SUCCESS_CODE){
           String data = AesUtil.aesDecrypt(result.data);
           return data;
