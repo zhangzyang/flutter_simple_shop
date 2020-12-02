@@ -1,6 +1,7 @@
+import 'package:demo1/modals/params_model/store_params_model.dart';
 import 'package:demo1/pages/index_page/model/category_model.dart';
 import 'package:demo1/pages/index_page/model/topic_model.dart';
-import 'package:demo1/service/index_service.dart';
+import 'package:demo1/service/app_service.dart';
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -21,11 +22,12 @@ class IndexProvider with ChangeNotifier {
   Future<void> fetchTopics() async {
     List<MainTopic> list = await IndexService.fetchTopics();
     this.mainTopic = list;
-    for (MainTopic mainTopic in list) {
-      print(mainTopic.topicName);
-      print(mainTopic.banner);
-    }
     notifyListeners();
+  }
+
+  /// 获取品牌栏目列表
+  Future<void> fetchStores() async {
+    await IndexService.fetchStores(StoreListParamsModel(mainCategorys[0].cid.toString(), "1", "10"));
   }
 
   /// 改变顶部背景颜色

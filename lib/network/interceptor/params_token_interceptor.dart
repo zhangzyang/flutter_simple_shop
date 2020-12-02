@@ -8,7 +8,6 @@ class ParamsTokenInterceptor extends Interceptor{
   final String token;
   ParamsTokenInterceptor(this.token);
 
-
   @override
   Future onRequest(RequestOptions options) {
     options.headers[HttpRequest.PARAMS_HEADER_KEY] = token;

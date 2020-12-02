@@ -1,5 +1,4 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:demo1/pages/index_page/store/store_service.dart';
 import 'package:flutter/material.dart';
 
 /// 首页推荐商店模块
@@ -18,6 +17,5 @@ class _StoreComponentIndexState extends State<StoreComponentIndex> with AfterLay
 
   @override
   void afterFirstLayout(BuildContext context) {
-    StoreService.fetchStoreList();
   }
 }

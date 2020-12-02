@@ -37,7 +37,9 @@ class RequestParamsUtils{
   /// 如果验证不通过
   /// 则非法请求
   static String generateToken(Map<String, String> params) {
+    print("进来了");
     String value = json.encode(params);
+    print("json="+value);
     value = base64Encode(utf8.encode(value));
     value = encryptMD5(value);
     return value;

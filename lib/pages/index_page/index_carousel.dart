@@ -1,6 +1,5 @@
 import 'package:demo1/config/app_config.dart';
 import 'package:demo1/pages/index_page/model/index_carousel_item_model.dart';
-import 'package:demo1/provider/carousel_provider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +84,5 @@ class _IndexCarouselState extends State<IndexCarousel> {
       NetworkImage(url),
       maximumColorCount: 20,
     );
-    Provider.of<CarouselProviderModal>(context, listen: false)
-        .onChange(index, color: paletteGenerator.dominantColor.color);
   }
 }

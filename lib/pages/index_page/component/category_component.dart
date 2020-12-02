@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// 通用分类插件
 class CategoryComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CategoryComponent extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 25.w),
       child: Text(
         mainCategory.cname,
-        style: TextStyle(fontSize: 55.sp, color: Colors.black),
+        style: TextStyle(fontSize: 55.sp, color: Color.fromRGBO(255, 255, 255, .65)),
       ),
     );
   }

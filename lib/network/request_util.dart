@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'file:///D:/shop/flutter_simple_shop-master/lib/network/request_params_util.dart';
+import 'package:demo1/network/request_params_util.dart';
 import 'aes_util.dart';
 
 /// 加密请求工具类
@@ -14,6 +13,12 @@ class RequestUtil{
     Map<String, String> newParams = RequestParamsUtils.keySort(params);
     String paramsToken = RequestParamsUtils.generateToken(newParams);
     String data = AesUtil.encryptAESCbc128WithPadding7(base64Encode(utf8.encode(json.encode(newParams))));
+    print("-----------------------------------------参数&MD5-------------------------------------");
+    params.keys.forEach((element) {
+      print("$element = ${params[element]}");
+    });
+    print(paramsToken);
+    print("---------------------------------------------------------------------------------");
     return ServerEncryptionData(paramsToken, data);
   }
 }

@@ -1,14 +1,12 @@
 import 'dart:ui';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/modals/dtkCategorys.dart';
 import 'package:demo1/modals/goods_list_modal.dart';
 import 'package:demo1/pages/index_page/store/component_index.dart';
 import 'package:demo1/provider/category_provider.dart';
 import 'package:demo1/provider/index_provider.dart';
 import 'package:demo1/repository/IndexGoodsRepository.dart';
-import 'package:demo1/widgets/RoundUnderlineTabIndicator.dart';
 import 'package:demo1/widgets/component/custom_select_toolbar.dart';
 import 'package:demo1/widgets/flexd/index_header_flexd_widget.dart';
 import 'package:demo1/widgets/flexd/index_main_goods_mini_title_bar.dart';
@@ -22,15 +20,12 @@ import 'package:loading_more_list/loading_more_list.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 import 'package:flutter/widgets.dart' hide NestedScrollView;
-import 'package:shimmer/shimmer.dart';
-import '../../provider/carousel_provider.dart';
 import '../../provider/dtk_index_goods_provider.dart';
 import './ddq.dart';
 import 'component/category_component.dart';
 import 'component/hodgepodge_widget.dart';
 import 'component/topic_carousel.dart';
 import 'grid_menu_list.dart';
-import 'index_carousel.dart';
 
 class IndexHome extends StatefulWidget {
   final ScrollController mController;
@@ -43,7 +38,6 @@ class IndexHome extends StatefulWidget {
 
 class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
 //   状态管理
-  CarouselProviderModal _carouselProviderModal;
   DtkIndexGoodsModal _dtkIndexGoodsModal;
   CategoryProvider _categoryProvider;
   IndexProvider _indexProvider;
@@ -78,8 +72,8 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<CarouselProviderModal, DtkIndexGoodsModal, CategoryProvider>(
-      builder: (content, cpm, digm, categoryProvider, _) => PullToRefreshNotification(
+    return Consumer2<DtkIndexGoodsModal, CategoryProvider>(
+      builder: (content, digm, categoryProvider, _) => PullToRefreshNotification(
           pullBackOnRefresh: false,
           maxDragOffset: 80.0,
           armedDragUpCancel: false,
@@ -87,70 +81,9 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
             await indexGoodsRepository.refresh(true);
             return true;
           },
-          child: _buildIndexBody(cpm)),
+          child: _buildIndexBody()),
       // child: IndexLoadingSkeletonPage(),)
     );
-  }
-
-  // 轮播图股架屏
-  Widget _buildGJP() {
-    if (_carouselProviderModal.carousels.isEmpty && carouselISLoaded) {
-      return Container(
-        height: 480.h,
-        width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: new Border.all(color: Colors.black12, width: 0.5),
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.warning,
-              color: Colors.blue,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              "请到后台设置轮播数据!",
-              style: TextStyle(color: Colors.blue),
-            ),
-          ],
-        ),
-      );
-    }
-    return Shimmer.fromColors(
-        child: Container(
-          height: 480.h,
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: new Border.all(color: Colors.black12, width: 0.5),
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          ),
-        ),
-        baseColor: Colors.grey[200],
-        highlightColor: Colors.grey[300]);
-  }
-
-  // tab股价屏
-  Widget _buildTabShimmer() {
-    return Shimmer.fromColors(
-        child: Container(
-          height: 100.h,
-          child: Center(
-            child: Text(
-              "加载中",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
-        baseColor: Colors.grey[200],
-        highlightColor: Colors.black26);
   }
 
   // 首页商品列表
@@ -181,7 +114,6 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    if (this._carouselProviderModal == null) this._carouselProviderModal = Provider.of<CarouselProviderModal>(context);
     if (this._dtkIndexGoodsModal == null) this._dtkIndexGoodsModal = Provider.of<DtkIndexGoodsModal>(context);
     if (this._categoryProvider == null) this._categoryProvider = Provider.of<CategoryProvider>(context);
     if (this._indexProvider == null) this._indexProvider = Provider.of<IndexProvider>(context);
@@ -192,8 +124,7 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
   Future<void> _initDatas() async {
     await _indexProvider.fetchCategorys(); // 超级菜单
     await _indexProvider.fetchTopics(); // 专辑列表
-
-    await _carouselProviderModal.getCarousel(); // 轮播图
+    await _indexProvider.fetchStores(); // 商店列表
     setState(() {
       carouselISLoaded = true;
     });
@@ -209,7 +140,7 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
   }
 
   // body
-  Widget _buildIndexBody(CarouselProviderModal cpm) {
+  Widget _buildIndexBody() {
     return LoadingMoreCustomScrollView(
       controller: _mainScrollController,
       slivers: <Widget>[
@@ -224,7 +155,7 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
 
         // appbar和tab和轮播图
         SliverToBoxAdapter(
-          child: _buildIndexTopWidgets(cpm),
+          child: _buildIndexTopWidgets(),
         ),
 
         // 下拉刷新指示头
@@ -270,7 +201,7 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
   }
 
   // 曲线
-  Widget _buildIndexTopWidgets(CarouselProviderModal cpm) {
+  Widget _buildIndexTopWidgets() {
     return Stack(
       children: <Widget>[
         ClipPath(

@@ -83,12 +83,12 @@ class HttpRequest {
           String data = AesUtil.aesDecrypt(result.data);
           return data;
         }else{
-          onError(result.state,result.message);
+          onError(result.state,result.message,url);
         }
       }
     } on DioError catch (e) {
       ErrorEntity en = new ErrorEntity().createErrorEntity(e);
-      print("dio请求出错:[${en.code}],错误信息:${en.message}");
+      print("dio请求出错:[${en.code}],错误信息:${en.message},接口:$url");
       return "";
     }
     return "";
@@ -105,10 +105,10 @@ class HttpRequest {
 }
 
 /// 定义服务器错误处理函数
-typedef ServerError = void Function(int code,String message);
+typedef ServerError = void Function(int code,String message,String api);
 
 /// 默认错误处理
 /// 这里只打印了一下服务器返回的报错信息
-void serverErrorDefaultHandle(int code,String message){
-  print("服务器自定义错误.code=$code,message=$message");
+void serverErrorDefaultHandle(int code,String message,String api){
+  print("服务器自定义错误.code=$code,message=$message,url=$api");
 }

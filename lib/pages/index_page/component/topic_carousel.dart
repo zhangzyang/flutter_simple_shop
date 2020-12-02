@@ -21,12 +21,15 @@ class IndexTopicComponentCarousel extends StatelessWidget {
         loop: true,
         onTap: (int index) async {
           MainTopic mainTopic = topics[index];
+          print("点击了主题${mainTopic.topicId}");
         },
         onIndexChanged: (index) {
-          Future.delayed(Duration(seconds: 0), () {
-            MainTopic mainTopic = topics[index];
-            Provider.of<IndexProvider>(context, listen: false).changeToColor(mainTopic.banner[0]);
-          });
+          if (topics.isNotEmpty) {
+            Future.delayed(Duration(seconds: 0), () {
+              MainTopic mainTopic = topics[index];
+              Provider.of<IndexProvider>(context, listen: false).changeToColor(mainTopic.banner[0]);
+            });
+          }
         },
         itemBuilder: (BuildContext context, int index) {
           MainTopic mainTopic = topics[index];
