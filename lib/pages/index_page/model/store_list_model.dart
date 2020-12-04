@@ -157,8 +157,8 @@ class StoreGoods {
     mainPic : asT<String>(jsonRes['mainPic']),
     marketingMainPic : asT<String>(jsonRes['marketingMainPic']),
     video : asT<String>(jsonRes['video']),
-    originPrice : asT<int>(jsonRes['originPrice']),
-    actualPrice : asT<int>(jsonRes['actualPrice']),
+    originPrice : asT<double>(jsonRes['originPrice']),
+    actualPrice : asT<double>(jsonRes['actualPrice']),
     couponId : asT<String>(jsonRes['couponId']),
     couponPrice : asT<int>(jsonRes['couponPrice']),
     couponLink : asT<String>(jsonRes['couponLink']),
@@ -187,8 +187,8 @@ class StoreGoods {
   String mainPic;
   String marketingMainPic;
   String video;
-  int originPrice;
-  int actualPrice;
+  double originPrice;
+  double actualPrice;
   String couponId;
   int couponPrice;
   String couponLink;

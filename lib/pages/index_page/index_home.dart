@@ -23,7 +23,6 @@ import 'package:flutter/widgets.dart' hide NestedScrollView;
 import '../../provider/dtk_index_goods_provider.dart';
 import './ddq.dart';
 import 'component/category_component.dart';
-import 'component/hodgepodge_widget.dart';
 import 'component/topic_carousel.dart';
 import 'grid_menu_list.dart';
 
@@ -147,7 +146,17 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
         SliverPersistentHeader(
           delegate: IndexFlexdHeaderWidget(child: [
             _buildAppbar(),
-            CategoryComponent(),
+            CategoryComponent(
+              extendItems: [
+                InsetCustomItem(
+                  index: 0,
+                  child: Text("首页"),
+                  onTap: (){
+                    print("我点击了首页");
+                  }
+                )
+              ],
+            ),
           ], color: _indexProvider.topBackground),
           floating: true,
           pinned: true,
@@ -174,9 +183,9 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
           child: StoreComponentIndex(),
         ),
 
-        SliverToBoxAdapter(
-          child: HodgepodgeWidget(),
-        ),
+        // SliverToBoxAdapter(
+        //   child: HodgepodgeWidget(),
+        // ),
 
         /// 商品列表标题
         SliverPersistentHeader(

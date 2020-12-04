@@ -26,8 +26,9 @@ class StoreItemCard extends StatelessWidget {
     return Container(
       height: 350.h,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      margin: EdgeInsets.only(top: 30.h),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: bgColor.withOpacity(.05),
         borderRadius: BorderRadius.all(Radius.circular(30.sp)),
       ),
       child: Column(

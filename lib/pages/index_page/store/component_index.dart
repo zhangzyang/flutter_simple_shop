@@ -1,4 +1,5 @@
 import 'package:demo1/pages/index_page/model/store_list_model.dart';
+import 'package:demo1/pages/index_page/store/goods_card.dart';
 import 'package:demo1/pages/index_page/store/store_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:demo1/provider/index_provider.dart';
@@ -19,12 +20,13 @@ class StoreComponentIndex extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(50.sp)),
             ),
             child: Column(
-              children: [_buildTitle(context), StoreItemCard(storeInfo: storeData.lists[0])],
+              children: [_buildTitle(context), StoreItemCard(storeInfo: storeData.lists[0]),StoreGoodsCard(storeInfo: storeData.lists[0],)],
             ),
           )
         : Container();
   }
 
+  /// 标题区域
   Widget _buildTitle(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 50.w),
