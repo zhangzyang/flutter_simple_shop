@@ -12,13 +12,21 @@ class StoreGoodsItemLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Stack(
             children: [
               Image.network(storeGoods.mainPic),
-              Positioned(child: _buildDiscountLayout(),bottom: 0,right: 0,)
+              Positioned(
+                child: _buildDiscountLayout(),
+                bottom: 0,
+                right: 0,
+              )
             ],
           ),
           PriceLayout(original: "${storeGoods.originPrice}", discounts: "${storeGoods.actualPrice}")
@@ -28,14 +36,17 @@ class StoreGoodsItemLayout extends StatelessWidget {
   }
 
   /// 折扣小部件
-  Widget _buildDiscountLayout(){
+  Widget _buildDiscountLayout() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
         color: Colors.pinkAccent.withOpacity(.5),
         borderRadius: BorderRadius.all(Radius.circular(30.sp)),
       ),
-      child: Text("${storeGoods.discount}折",style: TextStyle(fontSize: 50.sp,color: Colors.white),),
+      child: Text(
+        "${storeGoods.discount}折",
+        style: TextStyle(fontSize: 50.sp, color: Colors.white),
+      ),
     );
   }
 }

@@ -72,7 +72,7 @@ class StoreInfo {
     brandLogo : asT<String>(jsonRes['brandLogo']),
     brandFeatures : asT<String>(jsonRes['brandFeatures']),
     sales : asT<int>(jsonRes['sales']),
-    maxDiscountAmount : asT<int>(jsonRes['maxDiscountAmount']),
+    maxDiscountAmount : asT<double>(jsonRes['maxDiscountAmount']),
     maxDiscount : asT<double>(jsonRes['maxDiscount']),
     goodsList:goodsList,
   );}
@@ -82,7 +82,7 @@ class StoreInfo {
   String brandLogo;
   String brandFeatures;
   int sales;
-  int maxDiscountAmount;
+  double maxDiscountAmount;
   double maxDiscount;
   List<StoreGoods> goodsList;
 

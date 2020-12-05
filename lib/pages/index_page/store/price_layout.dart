@@ -10,12 +10,15 @@ class PriceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text("¥ $original",style: TextStyle(fontSize: 60.sp,color: Colors.red)),
-        SizedBox(width: 10.w),
-        Text("¥$discounts",style: TextStyle(fontSize: 50.sp,color: Colors.grey,decoration: TextDecoration.lineThrough)),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 5.h),
+      child: Row(
+        children: [
+          Text("¥ $original",style: TextStyle(fontSize: 55.sp,color: Colors.red)),
+          SizedBox(width: 10.w),
+          Text("¥$discounts",style: TextStyle(fontSize: 48.sp,color: Colors.grey,decoration: TextDecoration.lineThrough)),
+        ],
+      ),
     );
   }
 }

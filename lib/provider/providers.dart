@@ -1,3 +1,4 @@
+import 'package:demo1/pages/brand_page/provider/brand_provider.dart';
 import 'package:demo1/provider/index_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:nested/nested.dart';
@@ -23,4 +24,5 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider<DdqProvider>(create: (_)=>DdqProvider()),
   ChangeNotifierProvider<UserProvider>(create: (_)=>UserProvider()),
   ChangeNotifierProvider<IndexProvider>(create: (_)=>IndexProvider()),
+  ChangeNotifierProvider<BrandProvider>(create: (_)=>BrandProvider()),
 ];

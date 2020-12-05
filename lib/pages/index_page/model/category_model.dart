@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 List<MainCategory> mainCategoryFromJson(String str) => List<MainCategory>.from(json.decode(str).map((x) => MainCategory.fromJson(x)));
 
 String mainCategoryToJson(List<MainCategory> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -19,6 +21,7 @@ class MainCategory {
   int cid;
   String cname;
   String cpic;
+  GlobalKey key = GlobalKey();
   List<Subcategory> subcategories;
 
   factory MainCategory.fromJson(Map<String, dynamic> json) => MainCategory(

@@ -408,6 +408,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.0-nullsafety.3"
+  nav_router:
+    dependency: "direct main"
+    description:
+      name: nav_router
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.7"
   nested:
     dependency: transitive
     description:
