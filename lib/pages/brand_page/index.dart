@@ -36,19 +36,19 @@ class _BrandListPageState extends State<BrandListPage> with AfterLayoutMixin<Bra
         controller: _easyRefreshController,
         slivers: [
           SliverPersistentHeader(delegate: CategoryDelegate(_categoryOnSelect, _categoryController), pinned: true),
-          SliverWaterfallFlow.count(
-              crossAxisCount: 1,
-              children: _brandProvider.lists
-                  .map((e) => BrandItemCard(
-                        storeInfo: e,
-                      ))
-                  .toList())
+          SliverWaterfallFlow.count(crossAxisCount: 1, children: _items())
         ],
         onRefresh: _refresh,
         onLoad: _load,
       ),
     );
   }
+
+  List<Widget> _items() => _brandProvider.lists
+      .map((e) => BrandItemCard(
+            storeInfo: e,
+          ))
+      .toList();
 
   /// 刷新页面
   Future<void> _refresh() async {

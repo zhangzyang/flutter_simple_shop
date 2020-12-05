@@ -1,8 +1,11 @@
+import 'package:demo1/pages/brand_page/provider/brand_provider.dart';
 import 'package:demo1/pages/index_page/model/store_list_model.dart';
 import 'package:demo1/pages/index_page/store/goods_item_layout.dart';
+import 'package:demo1/util/image_util.dart';
 import 'package:demo1/util/number_cover.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// 品牌布局
 class BrandItemCard extends StatelessWidget {
@@ -12,15 +15,20 @@ class BrandItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      ),
-      child: Column(
-        children: [_buildHeader(),_buildGoodsGrid()],
+    return GestureDetector(
+      onTap: () {
+        Provider.of<BrandProvider>(context, listen: false).detail("${storeInfo.brandId}");
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+        child: Column(
+          children: [_buildHeader(), _buildGoodsGrid()],
+        ),
       ),
     );
   }
@@ -39,7 +47,7 @@ class BrandItemCard extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Image.network(
-                  storeInfo.brandLogo,
+                  MImageUtils.magesProcessor(storeInfo.brandLogo),
                   width: 100.w,
                   height: 150.h,
                 ),
@@ -55,10 +63,10 @@ class BrandItemCard extends StatelessWidget {
                       children: [
                         Text(
                           "${storeInfo.brandName}",
-                          style: TextStyle(fontSize: 55.sp, color: Colors.black),
+                          style: TextStyle(fontSize: 55.sp, color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "已售${Numeral(storeInfo.sales)}万件 >",
+                          "已售${Numeral(storeInfo.sales)}件 >",
                           style: TextStyle(fontSize: 48.sp, color: Colors.grey[500]),
                         )
                       ],
@@ -91,7 +99,6 @@ class BrandItemCard extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
     );
   }
-
 
   Widget _buildHeaderFlexCore(Widget widget, int flex) {
     return Flexible(

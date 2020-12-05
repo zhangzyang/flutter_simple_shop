@@ -1,4 +1,5 @@
 import 'package:demo1/pages/index_page/model/store_list_model.dart';
+import 'package:demo1/util/image_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:demo1/pages/index_page/store/price_layout.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class StoreGoodsItemLayout extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(storeGoods.mainPic),
+              Image.network(MImageUtils.magesProcessor(storeGoods.mainPic)),
               Positioned(
                 child: _buildDiscountLayout(),
                 bottom: 0,

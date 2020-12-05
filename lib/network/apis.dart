@@ -10,4 +10,7 @@ class Apis {
 
   /// 超级分类
   static const String CATEGORYS = PREFIX + "categorys";
+
+  /// 品牌详情
+  static const String BRAND_DETAIL = PREFIX + "brand-detail";
 }
