@@ -23,8 +23,10 @@ import 'package:flutter/widgets.dart' hide NestedScrollView;
 import '../../provider/dtk_index_goods_provider.dart';
 import './ddq.dart';
 import 'component/category_component.dart';
+import 'component/category_item_layout.dart';
 import 'component/topic_carousel.dart';
 import 'grid_menu_list.dart';
+import 'model/category_model.dart';
 
 class IndexHome extends StatefulWidget {
   final ScrollController mController;
@@ -88,7 +90,8 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
   // 首页商品列表
   Widget _buildGoodsList() {
     return LoadingMoreSliverList(SliverListConfig<GoodsItem>(
-      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: ScreenUtil().setHeight(30), mainAxisSpacing: ScreenUtil().setWidth(30)),
+      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, crossAxisSpacing: ScreenUtil().setHeight(30), mainAxisSpacing: ScreenUtil().setWidth(30)),
       itemBuilder: (context, item, index) {
         return WaterfallGoodsCard(item);
       },
@@ -149,13 +152,25 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
             CategoryComponent(
               extendItems: [
                 InsetCustomItem(
-                  index: 0,
-                  child: Text("首页"),
-                  onTap: (){
-                    print("我点击了首页");
-                  }
-                )
+                    index: 0,
+                    child: CategoryItemDefaultLayout(name: "首页", index: 0),
+                    onTap: () {
+                      print("我点击了首页");
+                    }),
+                InsetCustomItem(
+                    index: 1,
+                    child: Image.network(
+                      "https://img.alicdn.com/imgextra/i3/2053469401/O1CN0155SHle2JJi3TPPkS3_!!2053469401.png",
+                      fit: BoxFit.contain,
+                      width: 250.w,
+                    ),
+                    onTap: () {
+                      print("双十二预售");
+                    })
               ],
+              onSelect: (int index, MainCategory item) {
+                print("选中了:${item.cname},index是:$index");
+              },
             ),
           ], color: _indexProvider.topBackground),
           floating: true,
@@ -195,7 +210,11 @@ class _IndexHomeState extends State<IndexHome> with TickerProviderStateMixin, Af
               child: AnimatedContainer(
                 key: _titleKey,
                 duration: Duration(milliseconds: 300),
-                decoration: BoxDecoration(color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1), boxShadow: _titleIsInTop ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))] : []),
+                decoration: BoxDecoration(
+                    color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1),
+                    boxShadow: _titleIsInTop
+                        ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))]
+                        : []),
                 child: CustomSelectToolbar(items: [
                   SelectMenu(title: "佛系推荐", subTitle: '发现好物'),
                   SelectMenu(title: "精选", subTitle: '猜你喜欢'),
