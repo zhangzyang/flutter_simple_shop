@@ -13,7 +13,7 @@ class StoreGoodsItemLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Colors.grey[100].withOpacity(.8),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(

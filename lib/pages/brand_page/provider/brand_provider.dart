@@ -22,4 +22,16 @@ class BrandProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  /// 加载下一页
+  Future<void> load()async{
+    this.page = this.page+1;
+    print("正在加载下一页:$page");
+    StoreListParamsModel storeListParamsModel = StoreListParamsModel(this.cid, "${this.page}", "${this.size}");
+    StoreData storeData = await IndexService.fetchStores(storeListParamsModel);
+    if (storeData != null) {
+      this.lists.addAll(storeData.lists);
+    }
+    notifyListeners();
+  }
 }

@@ -56,11 +56,17 @@ class _BrandListPageState extends State<BrandListPage> with AfterLayoutMixin<Bra
     _easyRefreshController.finishRefresh();
   }
 
-  Future<void> _load() async {}
+  /// 加载下一页
+  Future<void> _load() async {
+    await _brandProvider.load();
+    _easyRefreshController.finishLoad();
+  }
 
   /// 菜单被选择
-  void _categoryOnSelect(int index, MainCategory item) {
+  void _categoryOnSelect(int index, MainCategory item) async {
     _categoryController.toIndex(index);
+    _brandProvider.setCid("${item.cid}");
+    _easyRefreshController.callRefresh();
   }
 
   @override
