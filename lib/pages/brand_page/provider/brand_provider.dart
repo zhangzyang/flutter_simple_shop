@@ -14,6 +14,7 @@ class BrandProvider extends ChangeNotifier {
   int pageId =  1;
   int pageSize = 20;
   List<BrandDetailGoodsList> brandGoodsList = [];
+  BrandDetailModel brandDetail;
 
   void setCid(String _cid) => this.cid = _cid;
 
@@ -49,7 +50,9 @@ class BrandProvider extends ChangeNotifier {
     StoreDetailParamsModel storeDetailParamsModel = StoreDetailParamsModel(_brandId, "$pageSize", "$pageId");
     BrandDetailModel brandDetailModel = await IndexService.fetchStoreDetail(storeDetailParamsModel);
     if (brandDetailModel != null) {
-
+      this.brandGoodsList.addAll(brandDetailModel.list);
+      this.brandDetail = brandDetailModel;
+      notifyListeners();
     }
   }
 }

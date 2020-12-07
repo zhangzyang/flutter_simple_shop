@@ -5,7 +5,10 @@ import 'package:demo1/util/image_util.dart';
 import 'package:demo1/util/number_cover.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:nav_router/nav_router.dart';
 import 'package:provider/provider.dart';
+
+import '../detail.dart';
 
 /// 品牌布局
 class BrandItemCard extends StatelessWidget {
@@ -17,7 +20,7 @@ class BrandItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Provider.of<BrandProvider>(context, listen: false).detail("${storeInfo.brandId}");
+        routePush(BrandDetailView(brandId: storeInfo.brandId.toString()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
