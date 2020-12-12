@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:demo1/modals/Result.dart';
 import 'package:demo1/util/result_obj_util.dart';
 import 'package:demo1/util/system_toast.dart';
@@ -7,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fsuper/fsuper.dart';
+
 import '../../../util/request_service.dart';
-import 'dart:math';
 
 class OrderAddIndexPage extends StatefulWidget {
   @override
@@ -36,8 +38,7 @@ class _OrderAddState extends State<OrderAddIndexPage> {
             buildPlaceHolderSizedBox(),
             Container(
               child: Center(
-                  child: SvgPicture.asset(
-                      "assets/svg/undraw_shopping_app_flsj.svg",
+                  child: SvgPicture.asset("assets/svg/undraw_shopping_app_flsj.svg",
                       height: ScreenUtil().setHeight(svgSize),
                       width: ScreenUtil().setWidth(svgSize))),
             ),
@@ -55,38 +56,33 @@ class _OrderAddState extends State<OrderAddIndexPage> {
               child: FButton(
                 width: ScreenUtil().setWidth(500),
                 height: ScreenUtil().setHeight(150),
-                effect: true,
                 text: "绑定",
-                textColor: Colors.white,
+                style: TextStyle(color: Colors.white, fontSize: 50.sp),
                 color: Colors.pinkAccent,
                 onPressed: () async {
-
                   // 获取文本框订单编号
                   String orderNumber = textEditingController.value.text;
-                  if(orderNumber.length!=19){
+                  if (orderNumber.length != 19) {
                     SystemToast.show("订单编号格式不正确");
                     return null;
                   }
                   await UserUtil.loadUserInfo().then((user) async {
                     if (user != null) {
-                      await addOrder({"userId": user.id, "orderNumber": orderNumber})
-                          .then((res) {
-                            Result result = ResultUtils.format(res);
-                            if(result.code==200){
-                              SystemToast.show("绑定成功");
-                              print("order:${result.data}");
-                            }else{
-                              SystemToast.show(result.msg);
-                            }
+                      await addOrder({"userId": user.id, "orderNumber": orderNumber}).then((res) {
+                        Result result = ResultUtils.format(res);
+                        if (result.code == 200) {
+                          SystemToast.show("绑定成功");
+                          print("order:${result.data}");
+                        } else {
+                          SystemToast.show(result.msg);
+                        }
                       });
                     }
                   });
                 },
                 clickEffect: true,
-                fontSize: ScreenUtil().setSp(50),
-                corner: FButtonCorner.all(9),
+                corner: FCorner.all(9),
                 padding: EdgeInsets.zero,
-                splashColor: Color(0xffff7043),
                 highlightColor: Color(0xffE65100).withOpacity(0.20),
                 hoverColor: Colors.redAccent.withOpacity(0.16),
               ),
@@ -95,22 +91,20 @@ class _OrderAddState extends State<OrderAddIndexPage> {
             Container(
               child: FSuper(
                 width: double.infinity,
-                padding: EdgeInsets.fromLTRB(
-                    (16.0 + 25.0 + 12), 8, (0.0 + 8.0), 8),
+                padding: EdgeInsets.fromLTRB((16.0 + 25.0 + 12), 8, (0.0 + 8.0), 8),
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                corner: Corner.all(6),
+                corner: FCorner.all(6),
                 backgroundColor: Color(0xfffff0e7),
                 strokeColor: Color(0xfffee0cd),
                 strokeWidth: 1,
                 text: '注意事项',
-                textColor: Color(0xff7e7c7a),
+                style: TextStyle(color: Color(0xff7e7c7a)),
                 textAlignment: Alignment.centerLeft,
                 textAlign: TextAlign.left,
                 spans: [
                   TextSpan(
-                    text: "\n只有通过本站链接购买的订单才能审核通过并获得奖励,否则绑定失败.(多次绑定失败将封号处理)",
-                    style: TextStyle(color: Colors.black26)
-                  )
+                      text: "\n只有通过本站链接购买的订单才能审核通过并获得奖励,否则绑定失败.(多次绑定失败将封号处理)",
+                      style: TextStyle(color: Colors.black26))
                 ],
                 child1: Transform.rotate(
                   angle: pi,
@@ -137,7 +131,6 @@ class _OrderAddState extends State<OrderAddIndexPage> {
   }
 
   SizedBox buildPlaceHolderSizedBox() => SizedBox(height: placeholderHeight);
-
 
   @override
   void dispose() {

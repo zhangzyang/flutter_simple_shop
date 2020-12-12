@@ -117,18 +117,18 @@ class FavoriteGoodsItem extends StatelessWidget {
     var difference = endTime.difference(now);
     Widget returnWidget = FSuper(
       text: "剩余有效期${difference.inDays}天${difference.inHours % 24}小时",
-      textColor: Color(0xffFF7043),
       padding: EdgeInsets.all(2),
-      corner: Corner.all(3),
+      corner: FCorner.all(3),
+      style: TextStyle(color: Color(0xffFF7043)),
       strokeColor: Color(0xffFF7043),
       strokeWidth: 1,
     );
     if (difference.inDays < 0) {
       returnWidget = FSuper(
         text: "已失效",
-        textColor: Color(0xffc2bfc2),
         padding: EdgeInsets.all(2),
-        corner: Corner.all(3),
+        corner: FCorner.all(3),
+        style: TextStyle(color: Color(0xffc2bfc2)),
         strokeColor: Color(0xffc2bfc2),
         strokeWidth: 1,
       );

@@ -1,9 +1,10 @@
+import 'package:fbutton/fbutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fbutton/fbutton.dart';
 import 'package:fsuper/fsuper.dart';
 import 'package:provider/provider.dart';
+
 import '../../../provider/user_provider.dart';
 
 // 用户登入页面
@@ -16,8 +17,8 @@ class _UserLoginPageState extends State<UserLoginPage> {
   bool isAgree = false; // 是否同意协议
   String username = ""; // 用户名
   String password = ""; // 密码
-  bool loading = false;// 是否登录中
-  UserProvider userProvider;// 用户状态管理
+  bool loading = false; // 是否登录中
+  UserProvider userProvider; // 用户状态管理
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,8 @@ class _UserLoginPageState extends State<UserLoginPage> {
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: Center(
-              child: Text("注册账号",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500)),
+              child:
+                  Text("注册账号", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
             ),
           )
         ],
@@ -53,8 +53,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                            borderRadius: BorderRadius.all(Radius.circular(10.0))),
                         child: Image.asset("assets/images/logo.png")),
                   ),
                 ),
@@ -75,8 +74,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: "手机号/邮箱",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10.0),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black12),
                           ),
@@ -84,7 +82,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                             borderSide: BorderSide(color: Colors.black12),
                           ),
                         ),
-                        onChanged: (val){
+                        onChanged: (val) {
                           setState(() {
                             username = val;
                           });
@@ -97,8 +95,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: "密码",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10.0),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black12),
                           ),
@@ -106,7 +103,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                             borderSide: BorderSide(color: Colors.black12),
                           ),
                         ),
-                        onChanged: (val){
+                        onChanged: (val) {
                           setState(() {
                             password = val;
                           });
@@ -120,14 +117,13 @@ class _UserLoginPageState extends State<UserLoginPage> {
                 SizedBox(height: 40),
                 FButton(
                   width: ScreenUtil().setWidth(1300),
-                  effect: true,
                   text: "登录",
-                  textColor: Colors.white,
+                  style: TextStyle(color: Colors.white),
                   color: Colors.pink,
                   loading: loading,
-                  onPressed: () async{
+                  onPressed: () async {
                     bool isLoginSuccess = await this.userProvider.login(username, password);
-                    if(isLoginSuccess){
+                    if (isLoginSuccess) {
                       Navigator.pop(context);
                     }
                     setState(() {
@@ -135,7 +131,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                     });
                   },
                   clickEffect: true,
-                  corner: FButtonCorner.all(0),
+                  corner: FCorner.all(0),
                   loadingSize: 15,
                   imageMargin: 6,
                   loadingStrokeWidth: 2,
@@ -163,9 +159,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                         });
                       },
                       child: Image.asset(
-                        isAgree
-                            ? "assets/icons/select.png"
-                            : "assets/icons/select_no.png",
+                        isAgree ? "assets/icons/select.png" : "assets/icons/select_no.png",
                         height: ScreenUtil().setHeight(58),
                         width: ScreenUtil().setWidth(58),
                       ),
@@ -174,17 +168,13 @@ class _UserLoginPageState extends State<UserLoginPage> {
                       padding: const EdgeInsets.only(left: 5.0),
                       child: FSuper(
                         text: "我已阅读并同意",
-                        textColor: Colors.white,
+                        style: TextStyle(color: Colors.white),
                         spans: [
                           TextSpan(
-                              text: "用户协议",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline)),
+                              text: "用户协议", style: TextStyle(decoration: TextDecoration.underline)),
                           TextSpan(text: "和", style: TextStyle()),
                           TextSpan(
-                              text: "隐私政策",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline)),
+                              text: "隐私政策", style: TextStyle(decoration: TextDecoration.underline)),
                         ],
                       ),
                     ),
@@ -200,8 +190,8 @@ class _UserLoginPageState extends State<UserLoginPage> {
 
   @override
   void didChangeDependencies() {
-    UserProvider userProvider =  Provider.of<UserProvider>(context);
-    if(this.userProvider!=userProvider){
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    if (this.userProvider != userProvider) {
       this.userProvider = userProvider;
     }
     super.didChangeDependencies();

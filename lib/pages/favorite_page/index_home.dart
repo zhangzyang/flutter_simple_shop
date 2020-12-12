@@ -1,4 +1,5 @@
 import 'package:demo1/provider/goods_detail_provider.dart';
+import 'package:demo1/provider/user_provider.dart';
 import 'package:demo1/widgets/refresh_and_load_more.dart';
 import 'package:fbutton/fbutton.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,13 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
 import 'package:provider/provider.dart';
-import 'package:demo1/provider/user_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'goods_item.dart';
-import '../../widgets/no_data.dart';
-import '../../util/system_toast.dart';
 import '../../constant/style.dart';
+import '../../util/system_toast.dart';
+import '../../widgets/no_data.dart';
+import 'goods_item.dart';
 
 class FavoriteIndexHome extends StatefulWidget {
   @override
@@ -116,7 +116,7 @@ class _IndexState extends State<FavoriteIndexHome> {
                                   children: <Widget>[
                                     FSuper(
                                       text: "已选 ",
-                                      textColor: Colors.grey,
+                                      style: TextStyle(color: Colors.grey),
                                       spans: [
                                         TextSpan(
                                             text: userProvider.editFavoriteIds.length.toString(),
@@ -128,9 +128,8 @@ class _IndexState extends State<FavoriteIndexHome> {
                                     ),
                                     FButton(
                                       width: ScreenUtil().setWidth(300),
-                                      effect: true,
                                       text: "删除",
-                                      textColor: Colors.white,
+                                      style: TextStyle(color: Colors.white),
                                       padding: EdgeInsets.zero,
                                       color: Colors.pinkAccent,
                                       onPressed: userProvider.editFavoriteIds.length != 0
@@ -169,7 +168,7 @@ class _IndexState extends State<FavoriteIndexHome> {
                                           : null,
                                       clickEffect: true,
                                       shadowBlur: 10.0,
-                                      corner: FButtonCorner.all(25),
+                                      corner: FCorner.all(25),
                                     ),
                                     InkWell(
                                         onTap: () {

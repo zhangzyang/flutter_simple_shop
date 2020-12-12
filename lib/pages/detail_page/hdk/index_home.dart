@@ -282,11 +282,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
                           height: ScreenUtil().setHeight(150),
                           width: ScreenUtil().setWidth(335),
                           text: '复制口令',
-                          textWeight: FontWeight.bold,
                           textAlignment: Alignment.center,
-                          textSize: ScreenUtil().setSp(45),
-                          textColor: Colors.white,
-                          corner: Corner.all(23),
+                          corner: FCorner.all(23),
+                          style: TextStyle(
+                              fontSize: 45.sp, color: Colors.white, fontWeight: FontWeight.bold),
                           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
                           gradient: LinearGradient(colors: [
                             Colors.redAccent,
@@ -313,11 +312,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
                           height: ScreenUtil().setHeight(150),
                           width: ScreenUtil().setWidth(335),
                           text: '立即领券',
-                          textWeight: FontWeight.bold,
                           textAlignment: Alignment.center,
-                          textSize: ScreenUtil().setSp(45),
-                          textColor: Colors.white,
-                          corner: Corner.all(23),
+                          corner: FCorner.all(23),
+                          style: TextStyle(
+                              fontSize: 45.sp, color: Colors.white, fontWeight: FontWeight.bold),
                           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
                           gradient: LinearGradient(colors: [
                             Colors.pinkAccent,
@@ -408,30 +406,28 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FButton(
-                  effect: true,
                   text: "进店逛逛",
-                  textColor: Color.fromRGBO(254, 55, 56, 1),
+                  style: TextStyle(color: Color.fromRGBO(254, 55, 56, 1)),
                   color: Colors.white,
                   padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
                   onPressed: () {},
                   clickEffect: true,
                   strokeColor: Color.fromRGBO(254, 55, 56, 1),
                   strokeWidth: 1,
-                  corner: FButtonCorner.all(25),
+                  corner: FCorner.all(25),
                 ),
                 SizedBox(
                   width: ScreenUtil().setWidth(20),
                 ),
                 FButton(
-                  effect: true,
                   text: "全部商品",
-                  textColor: Colors.white,
+                  style: TextStyle(color: Colors.white),
                   color: Color.fromRGBO(254, 55, 56, 1),
                   padding: EdgeInsets.all(ScreenUtil().setWidth(15)),
                   onPressed: () {},
                   clickEffect: true,
                   strokeWidth: 1,
-                  corner: FButtonCorner.all(25),
+                  corner: FCorner.all(25),
                 ),
               ],
             ),
@@ -488,7 +484,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
           alignment: Alignment.topLeft,
           child: FSuper(
             textAlign: TextAlign.start,
-            textSize: ScreenUtil().setSp(40),
+            style: TextStyle(fontSize: 40.sp),
             spans: [
               TextSpan(text: "推荐理由: ", style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(text: "${info.itemdesc}", style: TextStyle(color: Colors.grey)),
@@ -646,9 +642,8 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
                 FSuper(
                   text: "满减",
                   backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  corner: Corner.all(5),
-                  textSize: ScreenUtil().setSp(40),
+                  corner: FCorner.all(5),
+                  style: TextStyle(fontSize: 40.sp, color: Colors.white),
                   textAlign: TextAlign.center,
                   textAlignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
@@ -711,7 +706,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
               ),
               FSuper(
                 text: "已售 ${info.itemsale}",
-                textColor: Colors.grey,
+                style: TextStyle(color: Colors.grey),
               )
             ],
           ),
@@ -735,8 +730,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
           children: <Widget>[
             FSuper(
               text: '券后价 ¥',
-              textSize: ScreenUtil().setSp(50),
-              textColor: Colors.redAccent,
+              style: TextStyle(fontSize: 50.sp, color: Colors.redAccent),
               spans: [
                 TextSpan(
                   text: '${info.itemendprice} ',
@@ -750,17 +744,15 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProv
                   style: TextStyle(fontSize: ScreenUtil().setSp(50)),
                 ),
               ],
-              corner: Corner.all(20),
+              corner: FCorner.all(20),
             ),
 
             // 预计可得
             FSuper(
               text: "预计收益 ¥${info.tkmoney}",
-              textSize: ScreenUtil().setSp(45),
-              textColor: Colors.red,
+              style: TextStyle(fontSize: 45.sp, color: Colors.red, fontWeight: FontWeight.bold),
               backgroundColor: Colors.pinkAccent.withOpacity(0.1),
               shadowBlur: 4,
-              textWeight: FontWeight.w600,
               padding: EdgeInsets.symmetric(
                   horizontal: ScreenUtil().setWidth(10), vertical: ScreenUtil().setHeight(5)),
             ),

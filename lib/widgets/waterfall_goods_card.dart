@@ -2,7 +2,7 @@ import 'package:demo1/util/navigator_util.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart' as Sc;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
 
 import '../widgets/coupon_price.dart';
@@ -22,7 +22,7 @@ class WaterfallGoodsCard extends StatelessWidget {
         },
         child: Container(
             //width: Sc.ScreenUtil().setWidth(640), // (1440-150) / 2
-            padding: EdgeInsets.only(bottom: Sc.ScreenUtil().setHeight(50)),
+            padding: EdgeInsets.only(bottom: 50.h),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -31,43 +31,42 @@ class WaterfallGoodsCard extends StatelessWidget {
               children: <Widget>[
                 _image(),
 
-                SizedBox(height: Sc.ScreenUtil().setHeight(20)),
+                SizedBox(height: 20.h),
 
                 // 标题
                 _title(datum.dtitle),
 
-                SizedBox(height: Sc.ScreenUtil().setHeight(20)),
+                SizedBox(height: 20.h),
                 // 购买理由
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: Sc.ScreenUtil().setWidth(40)),
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
                   child: Text(
                     datum.desc,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.grey, fontSize: Sc.ScreenUtil().setSp(45)),
+                    style: TextStyle(color: Colors.grey, fontSize: 45.sp),
                   ),
                 ),
 
-                SizedBox(height: Sc.ScreenUtil().setHeight(20)),
+                SizedBox(height: 20.h),
 
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.symmetric(horizontal: Sc.ScreenUtil().setWidth(40)),
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
                   child: FSuper(
                     text: '领 ${NumUtil.getNumByValueDouble(datum.couponPrice, 0)} 元券',
-                    textSize: Sc.ScreenUtil().setSp(45),
-                    padding: EdgeInsets.symmetric(horizontal: Sc.ScreenUtil().setWidth(40)),
-                    textColor: Colors.pink,
-                    corner: Corner.all(16),
+                    style: TextStyle(fontSize: 45.sp, color: Colors.pink),
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    corner: FCorner.all(16),
                     strokeColor: Colors.pink,
                     strokeWidth: 0.3,
                   ),
                 ),
 
-                SizedBox(height: Sc.ScreenUtil().setHeight(20)),
+                SizedBox(height: 20.h),
 
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: Sc.ScreenUtil().setWidth(40)),
+                  padding: EdgeInsets.symmetric(horizontal: 40.w),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     verticalDirection: VerticalDirection.up,
@@ -84,17 +83,14 @@ class WaterfallGoodsCard extends StatelessWidget {
 
   Widget _title(String dtitle) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: Sc.ScreenUtil().setWidth(40)),
+        padding: EdgeInsets.symmetric(horizontal: 40.w),
         child: Stack(
           children: <Widget>[
             Container(
               alignment: Alignment.topLeft,
               child: Text(
                 dtitle,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: Sc.ScreenUtil().setSp(45)),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 45.sp),
 //                maxLines: 1,
 //                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.start,

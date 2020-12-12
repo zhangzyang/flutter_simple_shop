@@ -8,44 +8,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
 
-
 // 商品特殊组件显示
 
-class GoodsText extends SpecialText{
+class GoodsText extends SpecialText {
   static final String flag = "[goodsId=";
   final int start;
   final SpecialTextGestureTapCallback onTap;
-  GoodsText(TextStyle textStyle,{this.start,this.onTap}) : super(flag, "End]", textStyle);
-
-
+  GoodsText(TextStyle textStyle, {this.start, this.onTap}) : super(flag, "End]", textStyle);
 
   @override
   InlineSpan finishText() {
-
     String goodsText = getContent();
-    String jsonStr = goodsText.substring(0,goodsText.lastIndexOf("End"));
+    String jsonStr = goodsText.substring(0, goodsText.lastIndexOf("End"));
     GoodsInfo goodsInfo = GoodsInfo.fromJson(json.decode(jsonStr));
     String dtitle = goodsInfo.data.dtitle;
     String mainPic = goodsInfo.data.mainPic;
-    String actualPrice = goodsInfo.data.actualPrice.toString();//券后价
-    String discounts = goodsInfo.data.discounts.toString();// 折扣力度
+    String actualPrice = goodsInfo.data.actualPrice.toString(); //券后价
+    String discounts = goodsInfo.data.discounts.toString(); // 折扣力度
     return ExtendedWidgetSpan(
         actualText: toString(),
         deleteAll: true,
         start: start,
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             print("商品卡片被按下了");
             onTap?.call(jsonStr);
           },
           child: Container(
             height: ScreenUtil().setHeight(400),
-            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50),vertical: ScreenUtil().setHeight(50)),
-            margin: EdgeInsets.only(top: 10,bottom: 10),
+            padding: EdgeInsets.symmetric(
+                horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(50)),
+            margin: EdgeInsets.only(top: 10, bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.black12,
-              borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
+                color: Colors.black12, borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Row(
               children: <Widget>[
                 ExtendedImage.network(
@@ -59,7 +54,9 @@ class GoodsText extends SpecialText{
 
                   //cancelToken: cancellationToken,
                 ),
-                SizedBox(width: 20,),
+                SizedBox(
+                  width: 20,
+                ),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,22 +64,19 @@ class GoodsText extends SpecialText{
                     children: <Widget>[
                       Text("${dtitle}",
                           maxLines: 1,
-                          overflow: TextOverflow.ellipsis
-                          ,style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                            fontSize: ScreenUtil().setSp(60)
-                      )),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                              fontSize: ScreenUtil().setSp(60))),
                       FSuper(
                         padding: EdgeInsets.fromLTRB(9, 6, 9, 6),
                         text: '¥',
-                        textSize: 11,
-                        textColor: Colors.white,
+                        style: TextStyle(fontSize: 11, color: Colors.white),
                         spans: [
                           TextSpan(
                             text: '${actualPrice}券后 ',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w800),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                           ),
                           TextSpan(
                             text: '${discounts}折',
@@ -90,7 +84,7 @@ class GoodsText extends SpecialText{
                           ),
                         ],
                         backgroundColor: Colors.pinkAccent,
-                        corner: Corner.all(20),
+                        corner: FCorner.all(20),
                       )
                     ],
                   ),
@@ -98,8 +92,6 @@ class GoodsText extends SpecialText{
               ],
             ),
           ),
-        )
-    );
+        ));
   }
-
 }

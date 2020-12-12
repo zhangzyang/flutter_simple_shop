@@ -1,16 +1,17 @@
 import 'package:demo1/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import './chat/message_page.dart';
-import './personal/personal.dart';
-import './modals/IndexData.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import './pages/index_page/index_home.dart';
+import 'package:provider/provider.dart';
+
+import './chat/message_page.dart';
+import './modals/IndexData.dart';
 import './pages/category_page/index_home.dart';
-import './pages/jiujiu_page/index_home.dart';
 import './pages/favorite_page/index_home.dart';
+import './pages/index_page/index_home.dart';
+import './pages/jiujiu_page/index_home.dart';
 import './pages/user_home_page/index_home.dart';
+import './personal/personal.dart';
 
 class App extends StatefulWidget {
   @override
@@ -20,8 +21,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   UserProvider userProvider;
   static ScrollController mController = new ScrollController();
-  static ScrollController jiujiuController =
-      new ScrollController(); // 9.9包邮页面滑动控制器
+  static ScrollController jiujiuController = new ScrollController(); // 9.9包邮页面滑动控制器
 
   bool showToTopBtn = false; //是否显示“返回到顶部”按钮
 
@@ -106,7 +106,7 @@ class _AppState extends State<App> {
     );
 
     // 这里写是否显示或者影藏appbar(4--代表用户点击了我的页面)
-    if(_currentIndex==4 || _currentIndex==3 || _currentIndex==0 || _currentIndex==1){
+    if (_currentIndex == 4 || _currentIndex == 3 || _currentIndex == 0 || _currentIndex == 1) {
       widget = null;
     }
 
@@ -146,13 +146,16 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     // 屏幕适配初始化
-    ScreenUtil.init(context, width: 1440, height: 2960, allowFontScaling: true);
+    ScreenUtil.init(context, designSize: Size(1440, 2960), allowFontScaling: true);
 
     return Scaffold(
       appBar: _buildAppBar(),
       // 滚动到顶部按钮
-      floatingActionButton: !showToTopBtn || _currentIndex == 2 || _currentIndex == 3 || _currentIndex==0
-      || _currentIndex==4
+      floatingActionButton: !showToTopBtn ||
+              _currentIndex == 2 ||
+              _currentIndex == 3 ||
+              _currentIndex == 0 ||
+              _currentIndex == 4
           ? null
           : FloatingActionButton(
               child: Icon(Icons.arrow_upward, color: Colors.white),
@@ -160,13 +163,11 @@ class _AppState extends State<App> {
                 //返回到顶部时执行动画
                 if (_currentIndex == 0) {
                   mController.animateTo(.0,
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.ease);
+                      duration: Duration(milliseconds: 200), curve: Curves.ease);
                 }
                 if (_currentIndex == 1) {
                   jiujiuController.animateTo(.0,
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.ease);
+                      duration: Duration(milliseconds: 200), curve: Curves.ease);
                 }
               }),
       bottomNavigationBar: new BottomNavigationBar(
@@ -220,7 +221,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-              label: "收藏",
+                label: "收藏",
                 icon: _currentIndex == 3
                     ? Image.asset(
                         'assets/nav/shoucang.png',
@@ -233,7 +234,7 @@ class _AppState extends State<App> {
                         width: 32.0,
                       )),
             new BottomNavigationBarItem(
-              label: "我的",
+                label: "我的",
                 icon: _currentIndex == 4
                     ? Image.asset(
                         'assets/nav/my.png',
@@ -252,10 +253,11 @@ class _AppState extends State<App> {
       ),
     );
   }
+
   @override
   void didChangeDependencies() {
     UserProvider userProvider = Provider.of<UserProvider>(context);
-    if(this.userProvider!=userProvider){
+    if (this.userProvider != userProvider) {
       this.userProvider = userProvider;
       userProvider.loadUserInfo();
     }

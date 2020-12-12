@@ -5,15 +5,16 @@ import 'package:demo1/widgets/loading_more_list_indicator.dart';
 import 'package:demo1/widgets/waterfall_goods_card.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
-import '../../util/fluro_convert_util.dart';
+
 import './sort_widget.dart';
-import '../../widgets/StickyTabBarDelegate.dart';
-import '../../widgets/RoundUnderlineTabIndicator.dart';
 import '../../repository/GoodsListRepository.dart';
+import '../../util/fluro_convert_util.dart';
+import '../../widgets/RoundUnderlineTabIndicator.dart';
+import '../../widgets/StickyTabBarDelegate.dart';
 
 ///
 
@@ -26,16 +27,14 @@ class GoodsListPage extends StatefulWidget {
   final String cids;
   final String brand;
   final String title;
-  final  String showCates; // 是否显示分类选择
-  GoodsListPage(
-      {this.subcid, this.cids, this.brand, this.title, this.showCates = "0"});
+  final String showCates; // 是否显示分类选择
+  GoodsListPage({this.subcid, this.cids, this.brand, this.title, this.showCates = "0"});
 
   @override
   _GoodsListPageState createState() => _GoodsListPageState();
 }
 
-class _GoodsListPageState extends State<GoodsListPage>
-    with TickerProviderStateMixin {
+class _GoodsListPageState extends State<GoodsListPage> with TickerProviderStateMixin {
   bool showToTopBtn = false; //是否显示到达顶部按钮
   CategoryProvider categoryProvider;
   bool changeSortIng = false; // 切换排序中
@@ -49,7 +48,7 @@ class _GoodsListPageState extends State<GoodsListPage>
   int priceSortType = 0; // 0:从高到低,1:从低到高
   String initCid; // 分类初始化默认选中
   String currentSubCategory; // 选中的子分类
-  String currentMainCategory;// 选中的主分类
+  String currentMainCategory; // 选中的主分类
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +86,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                 SliverToBoxAdapter(
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                      color: Colors.white,
                     ),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -95,9 +94,7 @@ class _GoodsListPageState extends State<GoodsListPage>
                           mainAxisSpacing: 5,
                           crossAxisSpacing: 5,
                           childAspectRatio: 0.8),
-                      itemCount: showSubcategorys.length > 10
-                          ? 10
-                          : showSubcategorys.length,
+                      itemCount: showSubcategorys.length > 10 ? 10 : showSubcategorys.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return buildSubCategoryItem(showSubcategorys[index]);
@@ -149,15 +146,11 @@ class _GoodsListPageState extends State<GoodsListPage>
                 LoadingMoreSliverList(SliverListConfig<GoodsItem>(
                   sourceList: goodsListRepository,
                   extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
+                      crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
                   padding: EdgeInsets.all(10),
-                  itemBuilder: (context, item, index) =>
-                      WaterfallGoodsCard(item),
+                  itemBuilder: (context, item, index) => WaterfallGoodsCard(item),
                   indicatorBuilder: (context, state) {
-                    return LoadingMoreListCostumIndicator(state,
-                        isSliver: true);
+                    return LoadingMoreListCostumIndicator(state, isSliver: true);
                   },
                 ))
               ],
@@ -177,10 +170,7 @@ class _GoodsListPageState extends State<GoodsListPage>
             currentSubCategory = subcategory.subcid.toString();
             currentMainCategory = "";
             this.goodsListRepository = GoodsListRepository(
-                cids: "",
-                g_sort: "0",
-                subcid: subcategory.subcid.toString(),
-                brand: "");
+                cids: "", g_sort: "0", subcid: subcategory.subcid.toString(), brand: "");
           });
           this.goodsListRepository.refresh(true);
           _tabController.animateTo(0);
@@ -220,17 +210,13 @@ class _GoodsListPageState extends State<GoodsListPage>
       pinned: true,
       delegate: StickyTabBarDelegate(
           child: TabBar(
-
         onTap: (index) async {
           if (index != 0) {
             setState(() {
               currentMainCategory = categorys[index - 1].cid.toString();
               currentSubCategory = "";
               this.goodsListRepository = GoodsListRepository(
-                  cids: categorys[index - 1].cid.toString(),
-                  g_sort: "0",
-                  subcid: "",
-                  brand: "");
+                  cids: categorys[index - 1].cid.toString(), g_sort: "0", subcid: "", brand: "");
             });
             changeSubCategory(index - 1);
             _tabController.animateTo(0);
@@ -257,14 +243,14 @@ class _GoodsListPageState extends State<GoodsListPage>
   @override
   void initState() {
     goodsListRepository = GoodsListRepository(
-        cids: widget.subcid!=""  ? "" : widget.cids,
+        cids: widget.subcid != "" ? "" : widget.cids,
         brand: widget.brand,
         subcid: widget.subcid,
         g_sort: "0");
     _tabController = TabController(vsync: this, length: 4);
     categorysTabBarController = TabController(vsync: this, length: 1);
     setState(() {
-      currentSubCategory = widget.subcid!=null ? widget.subcid : '';
+      currentSubCategory = widget.subcid != null ? widget.subcid : '';
       currentMainCategory = widget.cids;
     });
     super.initState();
@@ -341,10 +327,7 @@ class _GoodsListPageState extends State<GoodsListPage>
     if (index == 3 && priceSortType == 0) {
       _setCurrent(4);
       goodsListRepository = GoodsListRepository(
-          cids: currentMainCategory,
-          brand: widget.brand,
-          subcid: currentSubCategory,
-          g_sort: "4");
+          cids: currentMainCategory, brand: widget.brand, subcid: currentSubCategory, g_sort: "4");
       this.goodsListRepository.refresh(true);
       setState(() {
         priceSortType = 1;
@@ -367,7 +350,7 @@ class _GoodsListPageState extends State<GoodsListPage>
   void changeSubCategory(int index) {
     List<Subcategory> subCates = categorys[index].subcategories;
     setState(() {
-      showSubcategorys = subCates;// 网格显示的子分类List
+      showSubcategorys = subCates; // 网格显示的子分类List
     });
   }
 
@@ -385,9 +368,7 @@ class _GoodsListPageState extends State<GoodsListPage>
     var mode = info?.mode;
     // Widget refreshWiget = Container();
     //it should more than 18, so that RefreshProgressIndicator can be shown fully
-    if (info?.refreshWiget != null &&
-        offset > 18.0 &&
-        mode != RefreshIndicatorMode.error) {
+    if (info?.refreshWidget != null && offset > 18.0 && mode != RefreshIndicatorMode.error) {
       // refreshWiget = info.refreshWiget;
     }
 
@@ -442,10 +423,8 @@ class _GoodsListPageState extends State<GoodsListPage>
               alignment: Alignment.center,
               child: Text(
                 "$modeStr" ?? "",
-                style: TextStyle(
-                    fontSize: ScreenUtil().setSp(50),
-                    inherit: false,
-                    color: Colors.grey),
+                style:
+                    TextStyle(fontSize: ScreenUtil().setSp(50), inherit: false, color: Colors.grey),
               ),
             )
           ],

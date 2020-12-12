@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
+
 import '../../provider/goods_detail_provider.dart';
 
 // 底部浮动操作按钮
@@ -13,11 +14,7 @@ class ActionButtons extends StatelessWidget {
   final GoodsDetailProvider goodsDetailProvider;
   final UserProvider userProvider;
 
-  ActionButtons(
-      {this.goodsId,
-      this.getCallBack,
-      this.goodsDetailProvider,
-      this.userProvider});
+  ActionButtons({this.goodsId, this.getCallBack, this.goodsDetailProvider, this.userProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +24,8 @@ class ActionButtons extends StatelessWidget {
       child: FSuper(
         width: ScreenUtil().setWidth(1300),
         height: ScreenUtil().setHeight(240),
-        corner: Corner.all(12),
-        cornerStyle: CornerStyle.round,
+        corner: FCorner.all(12),
+        cornerStyle: FCornerStyle.round,
         backgroundColor: Color.fromRGBO(255, 255, 255, 0.85),
         shadowColor: Colors.black26,
         shadowBlur: 10,
@@ -38,8 +35,7 @@ class ActionButtons extends StatelessWidget {
               width: ScreenUtil().setWidth(600),
               height: ScreenUtil().setHeight(200),
               padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(20),
-                  vertical: ScreenUtil().setHeight(20)),
+                  horizontal: ScreenUtil().setWidth(20), vertical: ScreenUtil().setHeight(20)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +44,7 @@ class ActionButtons extends StatelessWidget {
                     height: ScreenUtil().setHeight(250),
 //                    width: ScreenUtil().setWidth(180),
                     text: "首页",
-                    textSize: ScreenUtil().setSp(40),
+                    style: TextStyle(fontSize: 40.sp),
                     textAlignment: Alignment.bottomCenter,
                     child1Alignment: Alignment.topCenter,
                     child1: Icon(
@@ -60,7 +56,7 @@ class ActionButtons extends StatelessWidget {
                     height: ScreenUtil().setHeight(250),
 //                    width: ScreenUtil().setWidth(180),
                     text: "分享",
-                    textSize: ScreenUtil().setSp(40),
+                    style: TextStyle(fontSize: 40.sp),
                     textAlignment: Alignment.bottomCenter,
                     child1Alignment: Alignment.topCenter,
                     child1: Icon(
@@ -81,7 +77,7 @@ class ActionButtons extends StatelessWidget {
                             height: ScreenUtil().setHeight(250),
 //                    width: ScreenUtil().setWidth(180),
                             text: "收藏",
-                            textSize: ScreenUtil().setSp(40),
+                            style: TextStyle(fontSize: 40.sp),
                             textAlignment: Alignment.bottomCenter,
                             child1Alignment: Alignment.topCenter,
                             child1: Icon(
@@ -100,8 +96,7 @@ class ActionButtons extends StatelessWidget {
                             height: ScreenUtil().setHeight(250),
 //                    width: ScreenUtil().setWidth(180),
                             text: "收藏",
-                            textColor: primaryColor,
-                            textSize: ScreenUtil().setSp(40),
+                            style: TextStyle(fontSize: 40.sp, color: primaryColor),
                             textAlignment: Alignment.bottomCenter,
                             child1Alignment: Alignment.topCenter,
                             child1: Icon(
@@ -117,11 +112,10 @@ class ActionButtons extends StatelessWidget {
             FSuper(
               width: ScreenUtil().setWidth(620),
               height: ScreenUtil().setHeight(250),
-              padding:
-                  EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+              padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
               margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-              textColor: Color(0xff333333),
-              corner: Corner.all(23),
+              corner: FCorner.all(23),
+              style: TextStyle(color: Color(0xff333333)),
               gradient: LinearGradient(colors: [
                 Color(0xfff093fb),
                 Color(0xfff5576c),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fsuper/fsuper.dart';
+
 import '../constant/color.dart';
 
 // 券后价小部件
@@ -36,8 +37,7 @@ class CouponPriceWidget extends StatelessWidget {
             child: Text("券后",
                 style: TextStyle(
                     color: Colors.black38,
-                    fontSize:
-                        ScreenUtil().setSp(couponPriceSymbolFontSize * 0.6))),
+                    fontSize: ScreenUtil().setSp(couponPriceSymbolFontSize * 0.6))),
           ),
           Container(
             child: Text(
@@ -51,8 +51,7 @@ class CouponPriceWidget extends StatelessWidget {
             child: Text(
               actualPrice.toString(),
               style: TextStyle(
-                  color: Colors.pinkAccent,
-                  fontSize: ScreenUtil().setSp(couponPriceFontSize)),
+                  color: Colors.pinkAccent, fontSize: ScreenUtil().setSp(couponPriceFontSize)),
             ),
           ),
           Container(
@@ -80,12 +79,11 @@ class CouponPriceWidget extends StatelessWidget {
     double discount = double.parse(numStr) * 10;
     return FSuper(
       backgroundColor: primaryColor,
-      textColor: Colors.white,
+      style: TextStyle(color: Colors.white),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       margin: EdgeInsets.only(left: 10),
-      corner: Corner.all(5),
-      text:
-          "${discount.toStringAsFixed(discount.truncateToDouble() == discount ? 0 : 1)}折",
+      corner: FCorner.all(5),
+      text: "${discount.toStringAsFixed(discount.truncateToDouble() == discount ? 0 : 1)}折",
     );
   }
 }
