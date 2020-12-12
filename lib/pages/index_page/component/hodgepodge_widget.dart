@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/modals/Result.dart';
 import 'package:demo1/pages/detail_page/hdk/model/index_grid_apecial_data_model.dart';
 import 'package:demo1/util/public.dart';
@@ -55,19 +54,17 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
     return IndexPublicLayout(
       padding: EdgeInsets.zero,
       child: Container(
-        height: ScreenUtil().setHeight(_warpHei+2),
+        height: ScreenUtil().setHeight(_warpHei + 2),
         width: ScreenUtil().setWidth(_warpWid),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(15))),
+        decoration:
+            BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Column(
           children: <Widget>[
             // 第一行
             Container(
               height: ScreenUtil().setHeight(_warpHei / 2 + 2),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(width: 2.h,color: Colors.grey[200]))
-              ),
+                  border: Border(bottom: BorderSide(width: 2.h, color: Colors.grey[200]))),
               child: Stack(
                 children: <Widget>[
                   Row(
@@ -75,7 +72,6 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                       // 上左一
                       Container(
                         width: ScreenUtil().setWidth(_warpWid / 2),
-
                         padding: EdgeInsets.symmetric(
                             horizontal: ScreenUtil().setWidth(30),
                             vertical: ScreenUtil().setHeight(30)),
@@ -85,27 +81,26 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                             Container(
                               child: buildTitleText(dataModel.leftTopOne.title,
                                   tag: dataModel.leftTopOne.tag,
-                              tagTextColor: dataModel.leftTopOne.tagtextColor),
+                                  tagTextColor: dataModel.leftTopOne.tagtextColor),
                               height: ScreenUtil().setHeight(150),
                             ),
                             SizedBox(
                               height: ScreenUtil().setHeight(20),
                             ),
                             Container(
-                              height: ScreenUtil()
-                                  .setHeight(_warpHei / 2 - 30 - 150 - 30 - 20),
+                              height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 150 - 30 - 20),
                               child: Row(
                                 children: <Widget>[
                                   // 迷你卡片
                                   Container(
-                                    width: ScreenUtil().setWidth(
-                                        (_warpWid / 2 - 30 - 30 - 30) / 2),
-                                    height: ScreenUtil().setHeight(
-                                        (_warpHei / 2 - 30 - 150 - 30 - 20)),
+                                    width: ScreenUtil().setWidth((_warpWid / 2 - 30 - 30 - 30) / 2),
+                                    height:
+                                        ScreenUtil().setHeight((_warpHei / 2 - 30 - 150 - 30 - 20)),
                                     decoration: BoxDecoration(),
                                     child: InkWell(
-                                      onTap: (){
-                                        NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.leftTopOne.goods[0].itemid);
+                                      onTap: () {
+                                        // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                                        //     context, dataModel.leftTopOne.goods[0].itemid);
                                       },
                                       child: Column(
                                         children: <Widget>[
@@ -116,8 +111,8 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                           ),
                                           Container(
                                               height: ScreenUtil().setHeight(50),
-                                              child: buildTextPrice(dataModel
-                                                  .leftTopOne.goods[0].itemendprice))
+                                              child: buildTextPrice(
+                                                  dataModel.leftTopOne.goods[0].itemendprice))
                                         ],
                                       ),
                                     ),
@@ -127,14 +122,14 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                   ),
                                   //第一行第二个商品
                                   Container(
-                                    width: ScreenUtil().setWidth(
-                                        (_warpWid / 2 - 30 - 30 - 30) / 2),
-                                    height: ScreenUtil().setHeight(
-                                        (_warpHei / 2 - 30 - 150 - 30 - 20)),
+                                    width: ScreenUtil().setWidth((_warpWid / 2 - 30 - 30 - 30) / 2),
+                                    height:
+                                        ScreenUtil().setHeight((_warpHei / 2 - 30 - 150 - 30 - 20)),
                                     decoration: BoxDecoration(),
                                     child: InkWell(
-                                      onTap: (){
-                                        NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.leftTopOne.goods[1].itemid);
+                                      onTap: () {
+                                        // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                                        //     context, dataModel.leftTopOne.goods[1].itemid);
                                       },
                                       child: Column(
                                         children: <Widget>[
@@ -145,8 +140,8 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                           ),
                                           Container(
                                               height: ScreenUtil().setHeight(50),
-                                              child: buildTextPrice(dataModel
-                                                  .leftTopOne.goods[1].itemendprice))
+                                              child: buildTextPrice(
+                                                  dataModel.leftTopOne.goods[1].itemendprice))
                                         ],
                                       ),
                                     ),
@@ -159,7 +154,7 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                       ),
                       // 上右二
                       Container(
-                        width: ScreenUtil().setWidth(_warpWid / 2 ),
+                        width: ScreenUtil().setWidth(_warpWid / 2),
                         padding: EdgeInsets.symmetric(
                             horizontal: ScreenUtil().setWidth(30),
                             vertical: ScreenUtil().setHeight(30)),
@@ -169,27 +164,26 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                             Container(
                               child: buildTitleText(dataModel.rightTopOne.title,
                                   tag: dataModel.rightTopOne.tag,
-                              tagTextColor: dataModel.rightTopOne.tagtextColor),
+                                  tagTextColor: dataModel.rightTopOne.tagtextColor),
                               height: ScreenUtil().setHeight(150),
                             ),
                             SizedBox(
                               height: ScreenUtil().setHeight(20),
                             ),
                             Container(
-                              height: ScreenUtil()
-                                  .setHeight(_warpHei / 2 - 30 - 150 - 30 - 20),
+                              height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 150 - 30 - 20),
                               child: Row(
                                 children: <Widget>[
                                   // 迷你卡片
                                   Container(
-                                    width: ScreenUtil().setWidth(
-                                        (_warpWid / 2 - 30 - 30 - 30) / 2),
-                                    height: ScreenUtil().setHeight(
-                                        (_warpHei / 2 - 30 - 150 - 30 - 20)),
+                                    width: ScreenUtil().setWidth((_warpWid / 2 - 30 - 30 - 30) / 2),
+                                    height:
+                                        ScreenUtil().setHeight((_warpHei / 2 - 30 - 150 - 30 - 20)),
                                     decoration: BoxDecoration(),
                                     child: InkWell(
-                                      onTap: (){
-                                        NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.rightTopOne.goods[0].itemid);
+                                      onTap: () {
+                                        // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                                        //     context, dataModel.rightTopOne.goods[0].itemid);
                                       },
                                       child: Column(
                                         children: <Widget>[
@@ -200,8 +194,8 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                           ),
                                           Container(
                                               height: ScreenUtil().setHeight(50),
-                                              child: buildTextPrice(dataModel
-                                                  .rightTopOne.goods[0].itemendprice))
+                                              child: buildTextPrice(
+                                                  dataModel.rightTopOne.goods[0].itemendprice))
                                         ],
                                       ),
                                     ),
@@ -210,14 +204,14 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                     width: ScreenUtil().setWidth(30),
                                   ),
                                   Container(
-                                    width: ScreenUtil().setWidth(
-                                        (_warpWid / 2 - 30 - 30 - 30) / 2),
-                                    height: ScreenUtil().setHeight(
-                                        (_warpHei / 2 - 30 - 150 - 30 - 20)),
+                                    width: ScreenUtil().setWidth((_warpWid / 2 - 30 - 30 - 30) / 2),
+                                    height:
+                                        ScreenUtil().setHeight((_warpHei / 2 - 30 - 150 - 30 - 20)),
                                     decoration: BoxDecoration(),
                                     child: InkWell(
-                                      onTap: (){
-                                        NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.rightTopOne.goods[1].itemid);
+                                      onTap: () {
+                                        // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                                        //     context, dataModel.rightTopOne.goods[1].itemid);
                                       },
                                       child: Column(
                                         children: <Widget>[
@@ -228,8 +222,8 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                                           ),
                                           Container(
                                               height: ScreenUtil().setHeight(80),
-                                              child: buildTextPrice(dataModel
-                                                  .rightTopOne.goods[1].itemendprice))
+                                              child: buildTextPrice(
+                                                  dataModel.rightTopOne.goods[1].itemendprice))
                                         ],
                                       ),
                                     ),
@@ -242,7 +236,14 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                       ),
                     ],
                   ),
-                  Positioned(child: Container(color: Colors.grey[300],width: 2.w,height: _warpHei/2,),left: (_warpWid/2).w,)
+                  Positioned(
+                    child: Container(
+                      color: Colors.grey[300],
+                      width: 2.w,
+                      height: _warpHei / 2,
+                    ),
+                    left: (_warpWid / 2).w,
+                  )
                 ],
               ),
             ),
@@ -251,21 +252,20 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
               height: ScreenUtil().setHeight(_warpHei / 2),
               width: ScreenUtil().setWidth(_warpWid),
               padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(30),
-                  vertical: ScreenUtil().setHeight(30)),
+                  horizontal: ScreenUtil().setWidth(30), vertical: ScreenUtil().setHeight(30)),
               child: Row(
                 children: <Widget>[
                   Container(
-                    width: ScreenUtil()
-                        .setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
+                    width: ScreenUtil().setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
                     height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 30),
                     child: Column(
                       children: <Widget>[
-                        buildBottomContainer(
-                            dataModel.bottomOne.title, dataModel.bottomOne.tag,tagTextColor: dataModel.bottomOne.tagtextColor),
+                        buildBottomContainer(dataModel.bottomOne.title, dataModel.bottomOne.tag,
+                            tagTextColor: dataModel.bottomOne.tagtextColor),
                         InkWell(
-                          onTap: (){
-                            NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.bottomOne.goods[0].itemid);
+                          onTap: () {
+                            // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                            //     context, dataModel.bottomOne.goods[0].itemid);
                           },
                           child: ExtendedImageWidget(
                             src: dataModel.bottomOne.goods[0].itempic,
@@ -280,16 +280,16 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                     width: ScreenUtil().setWidth(30),
                   ),
                   Container(
-                    width: ScreenUtil()
-                        .setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
+                    width: ScreenUtil().setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
                     height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 30),
                     child: Column(
                       children: <Widget>[
-                        buildBottomContainer(
-                            dataModel.bottomTwo.title, dataModel.bottomTwo.tag,tagTextColor: dataModel.bottomTwo.tagtextColor),
+                        buildBottomContainer(dataModel.bottomTwo.title, dataModel.bottomTwo.tag,
+                            tagTextColor: dataModel.bottomTwo.tagtextColor),
                         InkWell(
-                          onTap: (){
-                            NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.bottomTwo.goods[0].itemid);
+                          onTap: () {
+                            // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                            //     context, dataModel.bottomTwo.goods[0].itemid);
                           },
                           child: ExtendedImageWidget(
                             src: dataModel.bottomTwo.goods[0].itempic,
@@ -304,16 +304,16 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                     width: ScreenUtil().setWidth(30),
                   ),
                   Container(
-                    width: ScreenUtil()
-                        .setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
+                    width: ScreenUtil().setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
                     height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 30),
                     child: Column(
                       children: <Widget>[
-                        buildBottomContainer(dataModel.bottomThree.title,
-                            dataModel.bottomThree.tag,tagTextColor: dataModel.bottomThree.tagtextColor),
+                        buildBottomContainer(dataModel.bottomThree.title, dataModel.bottomThree.tag,
+                            tagTextColor: dataModel.bottomThree.tagtextColor),
                         InkWell(
-                          onTap: (){
-                            NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.bottomThree.goods[0].itemid);
+                          onTap: () {
+                            // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                            //     context, dataModel.bottomThree.goods[0].itemid);
                           },
                           child: ExtendedImageWidget(
                             src: dataModel.bottomThree.goods[0].itempic,
@@ -328,16 +328,16 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
                     width: ScreenUtil().setWidth(30),
                   ),
                   Container(
-                    width: ScreenUtil()
-                        .setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
+                    width: ScreenUtil().setWidth((_warpWid - 30 - 30 - 30 - 30 - 30) / 4),
                     height: ScreenUtil().setHeight(_warpHei / 2 - 30 - 30),
                     child: Column(
                       children: <Widget>[
-                        buildBottomContainer(dataModel.bottomFour.title,
-                            dataModel.bottomFour.tag,tagTextColor: dataModel.bottomFour.tagtextColor),
+                        buildBottomContainer(dataModel.bottomFour.title, dataModel.bottomFour.tag,
+                            tagTextColor: dataModel.bottomFour.tagtextColor),
                         InkWell(
-                          onTap: (){
-                            NavigatorUtil.gotoHaodankuGoodsDetailPage(context, dataModel.bottomFour.goods[0].itemid);
+                          onTap: () {
+                            // NavigatorUtil.gotoHaodankuGoodsDetailPage(
+                            //     context, dataModel.bottomFour.goods[0].itemid);
                           },
                           child: ExtendedImageWidget(
                             src: dataModel.bottomFour.goods[0].itempic,
@@ -360,25 +360,18 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
   Widget buildTextPrice(String price) {
     Widget priceText = FSuper(
       spans: [
+        TextSpan(text: "¥ ", style: TextStyle(fontSize: ScreenUtil().setSp(40), color: Colors.red)),
         TextSpan(
-          text: "¥ ",
-          style: TextStyle(fontSize: ScreenUtil().setSp(40), color: Colors.red)
-        ),
-        TextSpan(
-          text: "$price",
-          style: TextStyle(fontSize: ScreenUtil().setSp(50), color: Colors.red)
-        )
+            text: "$price", style: TextStyle(fontSize: ScreenUtil().setSp(50), color: Colors.red))
       ],
     );
     return priceText;
   }
 
-
   // 第二行tag迷你标题
-  Container buildBottomContainer(String title, String tag,{String tagTextColor}) {
-
+  Container buildBottomContainer(String title, String tag, {String tagTextColor}) {
     Color tagColor = Colors.grey;
-    if(tagTextColor!=null && tagTextColor !=""){
+    if (tagTextColor != null && tagTextColor != "") {
       tagColor = getColor(tagTextColor);
     }
     return Container(
@@ -403,11 +396,9 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
             alignment: Alignment.center,
             child: Text(
               tag,
-              style: TextStyle(
-                  fontSize: ScreenUtil().setSp(45), color: tagColor),
+              style: TextStyle(fontSize: ScreenUtil().setSp(45), color: tagColor),
             ),
-          )
-          ,
+          ),
           SizedBox(
             height: 20.h,
           )
@@ -424,15 +415,13 @@ class _HodgepodgeWidgetState extends State<HodgepodgeWidget> {
     );
   }
 
-  Widget buildTitleText(String titleText, {String tag,String tagTextColor}) {
+  Widget buildTitleText(String titleText, {String tag, String tagTextColor}) {
     TextStyle titleTextStyle = TextStyle(
-        color: Colors.black,
-        fontSize: ScreenUtil().setSp(70),
-        fontWeight: FontWeight.bold);
+        color: Colors.black, fontSize: ScreenUtil().setSp(70), fontWeight: FontWeight.bold);
 
     Color tagColor = Colors.grey;
-    if(tagTextColor!=null && tagTextColor !=""){
-     tagColor = getColor(tagTextColor);
+    if (tagTextColor != null && tagTextColor != "") {
+      tagColor = getColor(tagTextColor);
     }
     return FSuper(
       spans: [

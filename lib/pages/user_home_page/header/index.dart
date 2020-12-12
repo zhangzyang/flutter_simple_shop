@@ -1,4 +1,3 @@
-import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/modals/user_model.dart';
 import 'package:demo1/widgets/my_clipper.dart';
 import 'package:fbutton/fbutton.dart';
@@ -73,9 +72,7 @@ class HeaderIndex extends StatelessWidget {
                               Container(
                                 child: InkWell(
                                   onTap: () {
-                                    if (user == null) {
-                                      NavigatorUtil.gotoUserLoginPage(context);
-                                    }
+                                    if (user == null) {}
                                   },
                                   child: Text(
                                       user != null
@@ -92,8 +89,7 @@ class HeaderIndex extends StatelessWidget {
                               Container(
                                 child: Text("--",
                                     style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(60),
-                                        color: Colors.white)),
+                                        fontSize: ScreenUtil().setSp(60), color: Colors.white)),
                               )
                             ],
                           ),
@@ -119,8 +115,7 @@ class HeaderIndex extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        child:
-                            Text("立即签到", style: TextStyle(color: Colors.white)),
+                        child: Text("立即签到", style: TextStyle(color: Colors.white)),
                       )
                     ],
                   ),
@@ -134,14 +129,11 @@ class HeaderIndex extends StatelessWidget {
             child: Container(
               height: ScreenUtil().setHeight(500),
               width: ScreenUtil().setWidth(1300),
-              margin:
-                  EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(70)),
+              margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(70)),
               padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(50),
-                  vertical: ScreenUtil().setHeight(50)),
+                  horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(50)),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
+                  color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5))),
               child: Column(
                 children: <Widget>[
                   //第一行

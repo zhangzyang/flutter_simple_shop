@@ -2,11 +2,10 @@ import 'package:demo1/widgets/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../modals/ddq_modal.dart';
 import '../../widgets/tag_widget.dart';
-import '../../fluro/NavigatorUtil.dart';
 
-// 9.9商品卡片布局
 class GoodsItem extends StatelessWidget {
   final DdqGoodsListItem goodsItem;
   final int state;
@@ -34,8 +33,7 @@ class GoodsItem extends StatelessWidget {
           Expanded(
               child: InkWell(
             onTap: () {
-              NavigatorUtil.gotoGoodsDetailPage(
-                  context, goodsItem.id.toString());
+              // NavigatorUtil.gotoGoodsDetailPage(context, goodsItem.id.toString());
             },
             child: Container(
               padding: EdgeInsets.all(10.0),
@@ -50,16 +48,13 @@ class GoodsItem extends StatelessWidget {
                         children: <Widget>[
                           //标题
                           Text(goodsItem.dtitle,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                              style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1),
                           //店铺
                           Row(
                             children: <Widget>[
-                              TagWidget(
-                                  title: goodsItem.shopName, noBorder: true),
+                              TagWidget(title: goodsItem.shopName, noBorder: true),
                             ],
                           ),
 
@@ -71,24 +66,18 @@ class GoodsItem extends StatelessWidget {
                                 TextSpan(
                                     text: "￥",
                                     style: TextStyle(
-                                        color: state != 2
-                                            ? Colors.pinkAccent
-                                            : Colors.green,
+                                        color: state != 2 ? Colors.pinkAccent : Colors.green,
                                         fontSize: ScreenUtil().setSp(40))),
                                 TextSpan(
                                     text: "${goodsItem.actualPrice}",
                                     style: TextStyle(
-                                        color: state != 2
-                                            ? Colors.pinkAccent
-                                            : Colors.green,
+                                        color: state != 2 ? Colors.pinkAccent : Colors.green,
                                         fontSize: ScreenUtil().setSp(70),
                                         fontWeight: FontWeight.w600)),
                                 TextSpan(
                                     text: "  券后价    ",
                                     style: TextStyle(
-                                        color: state != 2
-                                            ? Colors.pinkAccent
-                                            : Colors.green,
+                                        color: state != 2 ? Colors.pinkAccent : Colors.green,
                                         fontSize: ScreenUtil().setSp(40))),
                                 TextSpan(
                                     text: "原价${goodsItem.originalPrice}",
@@ -166,9 +155,7 @@ class GoodsItem extends StatelessWidget {
                                   state != 2 ? "立即抢购" : "即将开始",
                                   style: TextStyle(
                                       fontSize: ScreenUtil().setSp(40),
-                                      color: state != 2
-                                          ? Colors.white
-                                          : Colors.green),
+                                      color: state != 2 ? Colors.white : Colors.green),
                                 ),
                               ))
                         ],

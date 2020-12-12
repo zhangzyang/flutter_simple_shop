@@ -1,13 +1,14 @@
 import 'dart:ui';
+
 import 'package:demo1/modals/ddq_modal.dart';
 import 'package:demo1/widgets/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../fluro/NavigatorUtil.dart';
-import '../../provider/ddq_provider.dart';
+import 'package:provider/provider.dart';
+
 import './index_layout.dart';
+import '../../provider/ddq_provider.dart';
 
 // 钉钉抢
 class DDQWidget extends StatefulWidget {
@@ -25,7 +26,8 @@ class _DDQWidgetState extends State<DDQWidget> {
     return Consumer<DdqProvider>(
       builder: (context, ddqProvider, _) => IndexPublicLayout(
         child: Container(
-          padding: EdgeInsets.symmetric( horizontal: ScreenUtil().setWidth(50),vertical: ScreenUtil().setHeight(25)),
+          padding: EdgeInsets.symmetric(
+              horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(25)),
           height: ScreenUtil().setHeight(900),
           child: Column(
             children: <Widget>[
@@ -42,7 +44,7 @@ class _DDQWidgetState extends State<DDQWidget> {
   }
 
   /// 标题version2
-  Widget _buildWidgetTitle({String title,double height}) {
+  Widget _buildWidgetTitle({String title, double height}) {
     String showTitle = title ?? "限时抢购";
     return Container(
       height: ScreenUtil().setHeight(height),
@@ -55,11 +57,13 @@ class _DDQWidgetState extends State<DDQWidget> {
               showTitle,
               style: TextStyle(color: Colors.black, fontSize: ScreenUtil().setSp(70)),
             ),
-          ),InkWell(
-            onTap: (){
-              NavigatorUtil.goTODdqPage(context);
-            },
-              child: Icon(Icons.chevron_right,color: Colors.grey,),
+          ),
+          InkWell(
+            onTap: () {},
+            child: Icon(
+              Icons.chevron_right,
+              color: Colors.grey,
+            ),
           )
         ],
       ),
@@ -74,40 +78,25 @@ class _DDQWidgetState extends State<DDQWidget> {
         height: ScreenUtil().setHeight(700),
         child: Row(
           children: <Widget>[
-            _mimiGoodsCard(
-                list[0].mainPic,
-                list[0].actualPrice.toString(),
-                list[0].originalPrice.toString(),
-                list[0].monthSales.toString(),
-                list[0].dtitle),
+            _mimiGoodsCard(list[0].mainPic, list[0].actualPrice.toString(),
+                list[0].originalPrice.toString(), list[0].monthSales.toString(), list[0].dtitle),
             SizedBox(width: ScreenUtil().setWidth(50)),
-            _mimiGoodsCard(
-                list[1].mainPic,
-                list[1].actualPrice.toString(),
-                list[1].originalPrice.toString(),
-                list[1].monthSales.toString(),
-                list[1].dtitle),
+            _mimiGoodsCard(list[1].mainPic, list[1].actualPrice.toString(),
+                list[1].originalPrice.toString(), list[1].monthSales.toString(), list[1].dtitle),
             SizedBox(width: ScreenUtil().setWidth(50)),
-            _mimiGoodsCard(
-                list[2].mainPic,
-                list[2].actualPrice.toString(),
-                list[2].originalPrice.toString(),
-                list[2].monthSales.toString(),
-                list[2].dtitle),
+            _mimiGoodsCard(list[2].mainPic, list[2].actualPrice.toString(),
+                list[2].originalPrice.toString(), list[2].monthSales.toString(), list[2].dtitle),
           ],
         ),
       );
     }
     return Row(
-      children: <Widget>[
-      ],
+      children: <Widget>[],
     );
   }
 
-
   // 商品卡片布局
-  Widget _mimiGoodsCard(
-      String src, String price, String orginPrice, String xl, String title) {
+  Widget _mimiGoodsCard(String src, String price, String orginPrice, String xl, String title) {
     return Container(
       width: ScreenUtil().setWidth(380),
       decoration: BoxDecoration(
@@ -119,8 +108,7 @@ class _DDQWidgetState extends State<DDQWidget> {
             src: src,
             height: 400,
             width: 370,
-            radius: BorderRadius.all(
-               Radius.circular(10)),
+            radius: BorderRadius.all(Radius.circular(10)),
           ),
           SizedBox(height: ScreenUtil().setHeight(50)),
           Container(
@@ -147,8 +135,7 @@ class _DDQWidgetState extends State<DDQWidget> {
                 Container(
                   child: Text(
                     '￥$price',
-                    style: TextStyle(
-                        color: Colors.red, fontSize: ScreenUtil().setSp(50)),
+                    style: TextStyle(color: Colors.red, fontSize: ScreenUtil().setSp(50)),
                   ),
                   alignment: Alignment.centerLeft,
                 ),

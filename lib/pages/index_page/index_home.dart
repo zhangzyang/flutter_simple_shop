@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/modals/dtkCategorys.dart';
 import 'package:demo1/modals/goods_list_modal.dart';
 import 'package:demo1/provider/category_provider.dart';
+import 'package:demo1/provider/dtk_index_goods_provider.dart';
 import 'package:demo1/repository/IndexGoodsRepository.dart';
 import 'package:demo1/widgets/RoundUnderlineTabIndicator.dart';
 import 'package:demo1/widgets/component/custom_select_toolbar.dart';
@@ -15,15 +15,15 @@ import 'package:demo1/widgets/my_clipper.dart';
 import 'package:demo1/widgets/pullto_refresh_header.dart';
 import 'package:demo1/widgets/waterfall_goods_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart' hide NestedScrollView;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
-import 'package:flutter/widgets.dart' hide NestedScrollView;
 import 'package:shimmer/shimmer.dart';
-import '../../provider/carousel_provider.dart';
-import '../../provider/dtk_index_goods_provider.dart';
+
 import './ddq.dart';
+import '../../provider/carousel_provider.dart';
 import 'component/hodgepodge_widget.dart';
 import 'grid_menu_list.dart';
 import 'index_carousel.dart';
@@ -37,7 +37,8 @@ class IndexHome extends StatefulWidget {
   _IndexHomeState createState() => _IndexHomeState();
 }
 
-class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
+class _IndexHomeState extends State<IndexHome>
+    with TickerProviderStateMixin, AfterLayoutMixin<IndexHome> {
 //   状态管理
   CarouselProviderModal carouselProviderModal;
   DtkIndexGoodsModal dtkIndexGoodsModal;
@@ -104,7 +105,10 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
         isScrollable: true,
         onTap: (index) {
           if (index > 0) {
-            NavigatorUtil.gotoGoodslistPage(context, showCates: "1", cids: categorys[index - 1].cid.toString(), title: categorys[index - 1].cname);
+            // NavigatorUtil.gotoGoodslistPage(context,
+            //     showCates: "1",
+            //     cids: categorys[index - 1].cid.toString(),
+            //     title: categorys[index - 1].cname);
           }
         },
         indicator: RoundUnderlineTabIndicator(
@@ -183,7 +187,10 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
   // 首页商品列表
   Widget _buildGoodsList() {
     return LoadingMoreSliverList(SliverListConfig<GoodsItem>(
-      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: ScreenUtil().setHeight(30), mainAxisSpacing: ScreenUtil().setWidth(30)),
+      extendedListDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: ScreenUtil().setHeight(30),
+          mainAxisSpacing: ScreenUtil().setWidth(30)),
       itemBuilder: (context, item, index) {
         return WaterfallGoodsCard(item);
       },
@@ -211,7 +218,10 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
     final carouselProviderModal = Provider.of<CarouselProviderModal>(context);
     final dtkIndexGoodsModal = Provider.of<DtkIndexGoodsModal>(context);
     final categoryProvider = Provider.of<CategoryProvider>(context);
-    await loadDatas(carouselProviderModal: carouselProviderModal, dtkIndexGoodsModal: dtkIndexGoodsModal, categoryProvider: categoryProvider);
+    await loadDatas(
+        carouselProviderModal: carouselProviderModal,
+        dtkIndexGoodsModal: dtkIndexGoodsModal,
+        categoryProvider: categoryProvider);
   }
 
   @override
@@ -220,7 +230,10 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
     indexGoodsRepository.dispose();
   }
 
-  Future<void> loadDatas({CarouselProviderModal carouselProviderModal, DtkIndexGoodsModal dtkIndexGoodsModal, CategoryProvider categoryProvider}) async {
+  Future<void> loadDatas(
+      {CarouselProviderModal carouselProviderModal,
+      DtkIndexGoodsModal dtkIndexGoodsModal,
+      CategoryProvider categoryProvider}) async {
     if (carouselProviderModal != this.carouselProviderModal) {
       this.carouselProviderModal = carouselProviderModal;
       // await carouselProviderModal.getCarousel();
@@ -291,7 +304,15 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
                 duration: Duration(milliseconds: 300),
                 decoration: BoxDecoration(
                     color: _titleIsInTop ? Colors.white : Color.fromRGBO(235, 235, 235, 1),
-                    boxShadow: _titleIsInTop ? [BoxShadow(color: Colors.grey[200], blurRadius: 1.0, spreadRadius: 1.0, offset: Offset(1, 1))] : []),
+                    boxShadow: _titleIsInTop
+                        ? [
+                            BoxShadow(
+                                color: Colors.grey[200],
+                                blurRadius: 1.0,
+                                spreadRadius: 1.0,
+                                offset: Offset(1, 1))
+                          ]
+                        : []),
                 child: CustomSelectToolbar(items: [
                   SelectMenu(title: "佛系推荐", subTitle: '发现好物'),
                   SelectMenu(title: "精选", subTitle: '猜你喜欢'),
@@ -350,7 +371,8 @@ class _IndexHomeState extends State<IndexHome> with  TickerProviderStateMixin, A
           textAlign: TextAlign.left,
           decoration: InputDecoration(
               hintText: '输入商品名或者宝贝标题搜索',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
               alignLabelWithHint: true,
               filled: true,
               fillColor: Colors.white,

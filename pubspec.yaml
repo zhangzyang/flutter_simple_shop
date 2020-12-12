@@ -16,14 +16,13 @@ dependencies:
   dio: ^3.0.9
   flutter_spinkit: ^4.1.2+1
   fluttertoast: ^4.0.0
-  flutter_screenutil: ^1.1.0 # 屏幕适配
-  flutter_swiper : ^1.1.6 # 轮播图
-  provider: ^4.0.5 # 状态管理
+  flutter_screenutil: ^1.1.0
+  flutter_swiper : ^1.1.6
+  provider: ^4.0.5
   gbk2utf8: ^1.0.0
-  fluro: ^1.7.7 # 路由
-  flutter_easyrefresh: ^2.1.6   # 上拉加载更多
-  flutter_custom_dialog: ^1.0.19  # 弹窗
-  pull_to_refresh: ^1.6.2 # 上拉加载
+  flutter_easyrefresh: ^2.1.6
+  flutter_custom_dialog: ^1.0.19
+  pull_to_refresh: ^1.6.2
   fbutton: ^1.0.4
   fradio: ^1.0.1
   fsuper: ^0.1.5
@@ -31,11 +30,12 @@ dependencies:
   common_utils: ^1.2.1
   extended_image: ^1.1.2
   extended_image_library: ^0.3.0
-  waterfall_flow: ^2.0.3  # 国产瀑布流
+  waterfall_flow: ^2.0.3
+  nav_router: ^0.0.7
   loading_more_list: ^3.1.1
   extended_list: ^2.0.2
   pull_to_refresh_notification: ^0.3.4
-  shimmer: ^1.1.1 #骨架屏
+  shimmer: ^1.1.1
   flutter_svg: ^0.19.0
   extended_text_field: ^5.0.0
   extended_text: ^4.0.0
@@ -44,7 +44,6 @@ dependencies:
   image_picker: ^0.6.6+5
   extended_tabs: ^0.2.3
   luhenchang_plugin: ^0.1.2
-#  flutter_alibc: ^0.0.15 # 淘宝登录
   after_layout: ^1.0.7+2
   palette_generator: ^0.2.3
   crypto: ^2.1.5

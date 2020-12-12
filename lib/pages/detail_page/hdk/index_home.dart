@@ -29,16 +29,15 @@ import 'package:luhenchang_plugin/time/data_time_utils/data_time.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HaoDanKuDetailItem extends StatefulWidget {
-final   String goodsId;
+  final String productId;
 
-  HaoDanKuDetailItem({this.goodsId});
+  HaoDanKuDetailItem({this.productId});
 
   @override
   _HaoDanKuDetailItemState createState() => _HaoDanKuDetailItemState();
 }
 
-class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
-    with TickerProviderStateMixin {
+class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem> with TickerProviderStateMixin {
   List<String> images = []; // 商品详情图
   Info info;
   List<Video> videos = [];
@@ -98,13 +97,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
   // 顶部选项卡被切换
   void tabOnChange(index) {
     if (index == 0) {
-      _scrollController.animateTo(0,
-          duration: Duration(milliseconds: 600), curve: Curves.ease);
+      _scrollController.animateTo(0, duration: Duration(milliseconds: 600), curve: Curves.ease);
     } else if (index == 1) {
-      _scrollController.animateTo(
-          _initImagesTopHei - ztlHei - _topAppbarHei + 5,
-          duration: Duration(milliseconds: 600),
-          curve: Curves.ease);
+      _scrollController.animateTo(_initImagesTopHei - ztlHei - _topAppbarHei + 5,
+          duration: Duration(milliseconds: 600), curve: Curves.ease);
     }
   }
 
@@ -133,11 +129,11 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.grey,
+
         ///这是设置状态栏的图标和字体的颜色
         ///Brightness.light  一般都是显示为白色
         ///Brightness.dark 一般都是显示为黑色
-        statusBarIconBrightness: Brightness.light
-    ));
+        statusBarIconBrightness: Brightness.light));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: null,
@@ -172,8 +168,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
         children: <Widget>[
           NestedScrollView(
               controller: _scrollController,
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                 return <Widget>[
                   SliverToBoxAdapter(
                     child: buildGoodsSwiper(),
@@ -199,17 +194,14 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                   child: InkWell(
                     onTap: () {
                       _scrollController.animateTo(0,
-                          duration: Duration(milliseconds: 600),
-                          curve: Curves.ease);
+                          duration: Duration(milliseconds: 600), curve: Curves.ease);
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(35)),
-                          border: Border.all(
-                              width: .5,
-                              color: Colors.black26.withOpacity(.2))),
+                          border: Border.all(width: .5, color: Colors.black26.withOpacity(.2))),
                       child: Icon(
                         Icons.vertical_align_top,
                         color: Colors.black,
@@ -224,11 +216,9 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
             bottom: ScreenUtil().setHeight(0),
             left: ScreenUtil().setWidth(0),
             child: Container(
-              margin:
-                  EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(0)),
+              margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(0)),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
+                  color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5))),
               width: ScreenUtil().setWidth(1440),
               height: ScreenUtil().setHeight(250),
               child: Row(
@@ -248,8 +238,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                                 ),
                                 Text(
                                   "首页",
-                                  style:
-                                      TextStyle(fontSize: ScreenUtil().setSp(40)),
+                                  style: TextStyle(fontSize: ScreenUtil().setSp(40)),
                                 )
                               ],
                             ),
@@ -263,8 +252,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                                 ),
                                 Text(
                                   "分享",
-                                  style:
-                                      TextStyle(fontSize: ScreenUtil().setSp(40)),
+                                  style: TextStyle(fontSize: ScreenUtil().setSp(40)),
                                 )
                               ],
                             ),
@@ -278,8 +266,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                                 ),
                                 Text(
                                   "收藏",
-                                  style:
-                                      TextStyle(fontSize: ScreenUtil().setSp(40)),
+                                  style: TextStyle(fontSize: ScreenUtil().setSp(40)),
                                 )
                               ],
                             ),
@@ -300,22 +287,19 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                           textSize: ScreenUtil().setSp(45),
                           textColor: Colors.white,
                           corner: Corner.all(23),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ScreenUtil().setWidth(50)),
+                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
                           gradient: LinearGradient(colors: [
                             Colors.redAccent,
                             Color(0xfffcad2c),
                           ]),
                           onClick: () async {
-                            await getPrivilegeLink({"goodsId": info.itemid})
-                                .then((res) async {
+                            await getPrivilegeLink({"goodsId": info.itemid}).then((res) async {
                               Result resultObj = ResultUtils.format(res);
                               if (resultObj.code == 200) {
-                                CouponInfo couponInfo = CouponInfo.fromJson(
-                                    json.decode(resultObj.data.toString()));
+                                CouponInfo couponInfo =
+                                    CouponInfo.fromJson(json.decode(resultObj.data.toString()));
                                 if (couponInfo.code == 0) {
-                                  String tkl =
-                                      couponInfo.data.tpwd;
+                                  String tkl = couponInfo.data.tpwd;
                                   Clipboard.setData(ClipboardData(text: tkl));
                                   SystemToast.show("复制成功,打开手淘即可领取");
                                 }
@@ -334,24 +318,20 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                           textSize: ScreenUtil().setSp(45),
                           textColor: Colors.white,
                           corner: Corner.all(23),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: ScreenUtil().setWidth(50)),
+                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
                           gradient: LinearGradient(colors: [
                             Colors.pinkAccent,
                             Color(0xfffcad2c),
                           ]),
                           onClick: () async {
-                            await getPrivilegeLink({"goodsId": info.itemid})
-                                .then((res) async {
+                            await getPrivilegeLink({"goodsId": info.itemid}).then((res) async {
                               Result resultObj = ResultUtils.format(res);
                               if (resultObj.code == 200) {
-                                CouponInfo couponInfo = CouponInfo.fromJson(
-                                    json.decode(resultObj.data.toString()));
+                                CouponInfo couponInfo =
+                                    CouponInfo.fromJson(json.decode(resultObj.data.toString()));
                                 if (couponInfo.code == 0) {
-                                  String couponClickUrl =
-                                      couponInfo.data.couponClickUrl;
-                                  String url =
-                                      "taobao://${couponClickUrl.substring(8)}";
+                                  String couponClickUrl = couponInfo.data.couponClickUrl;
+                                  String url = "taobao://${couponClickUrl.substring(8)}";
                                   if (await canLaunch(url)) {
                                     await launch(url);
                                   } else {
@@ -384,12 +364,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
           Container(
             child: Text(
               "宝贝详情",
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
             margin: EdgeInsets.symmetric(
-                vertical: ScreenUtil().setHeight(50),
-                horizontal: ScreenUtil().setWidth(50)),
+                vertical: ScreenUtil().setHeight(50), horizontal: ScreenUtil().setWidth(50)),
             alignment: Alignment.topLeft,
           ),
           buildImagesWidget()
@@ -409,11 +387,9 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
             child: Row(
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage:
-                      _shopInfo != null && _shopInfo.pictUrl != null
-                          ? NetworkImage(
-                              MImageUtils.magesProcessor(_shopInfo.pictUrl))
-                          : AssetImage("assets/images/ava.png"),
+                  backgroundImage: _shopInfo != null && _shopInfo.pictUrl != null
+                      ? NetworkImage(MImageUtils.magesProcessor(_shopInfo.pictUrl))
+                      : AssetImage("assets/images/ava.png"),
                 ),
                 SizedBox(
                   width: ScreenUtil().setWidth(30),
@@ -514,12 +490,8 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
             textAlign: TextAlign.start,
             textSize: ScreenUtil().setSp(40),
             spans: [
-              TextSpan(
-                  text: "推荐理由: ",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(
-                  text: "${info.itemdesc}",
-                  style: TextStyle(color: Colors.grey)),
+              TextSpan(text: "推荐理由: ", style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: "${info.itemdesc}", style: TextStyle(color: Colors.grey)),
               TextSpan(
                   text: "复制文案",
                   style: TextStyle(color: Colors.pinkAccent),
@@ -545,17 +517,13 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
     Widget widget = ContainerWarp(
         InkWell(
           onTap: () async {
-            await getPrivilegeLink({"goodsId": info.itemid})
-                .then((res) async {
+            await getPrivilegeLink({"goodsId": info.itemid}).then((res) async {
               Result resultObj = ResultUtils.format(res);
               if (resultObj.code == 200) {
-                CouponInfo couponInfo = CouponInfo.fromJson(
-                    json.decode(resultObj.data.toString()));
+                CouponInfo couponInfo = CouponInfo.fromJson(json.decode(resultObj.data.toString()));
                 if (couponInfo.code == 0) {
-                  String couponClickUrl =
-                      couponInfo.data.couponClickUrl;
-                  String url =
-                      "taobao://${couponClickUrl.substring(8)}";
+                  String couponClickUrl = couponInfo.data.couponClickUrl;
+                  String url = "taobao://${couponClickUrl.substring(8)}";
                   if (await canLaunch(url)) {
                     await launch(url);
                   } else {
@@ -571,8 +539,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
             width: ScreenUtil().setWidth(1440),
             height: ScreenUtil().setHeight(300),
             padding: EdgeInsets.symmetric(
-                horizontal: ScreenUtil().setWidth(30),
-                vertical: ScreenUtil().setHeight(20)),
+                horizontal: ScreenUtil().setWidth(30), vertical: ScreenUtil().setHeight(20)),
             decoration: BoxDecoration(
                 color: Color.fromRGBO(252, 54, 74, 1.0),
                 borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -623,8 +590,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                         height: ScreenUtil().setHeight(50),
                         width: ScreenUtil().setWidth(50),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromRGBO(252, 54, 74, 1.0)),
+                            shape: BoxShape.circle, color: Color.fromRGBO(252, 54, 74, 1.0)),
                       ),
                     ),
                     Positioned(
@@ -634,8 +600,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                         height: ScreenUtil().setHeight(50),
                         width: ScreenUtil().setWidth(50),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromRGBO(252, 54, 74, 1.0)),
+                            shape: BoxShape.circle, color: Color.fromRGBO(252, 54, 74, 1.0)),
                       ),
                     )
                   ],
@@ -646,8 +611,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                     margin: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
                     child: Text(
                       "立即领券 >",
-                      style: TextStyle(
-                          color: Colors.white, fontSize: ScreenUtil().setSp(50)),
+                      style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(50)),
                     ),
                   ),
                 )
@@ -673,8 +637,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
             width: ScreenUtil().setWidth(250),
             child: Text(
               "满减",
-              style: TextStyle(
-                  color: Colors.grey, fontSize: ScreenUtil().setSp(45)),
+              style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(45)),
             ),
           ),
           Expanded(
@@ -689,8 +652,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                   textAlign: TextAlign.center,
                   textAlignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtil().setWidth(20),
-                      vertical: ScreenUtil().setHeight(5)),
+                      horizontal: ScreenUtil().setWidth(20), vertical: ScreenUtil().setHeight(5)),
                 ),
                 Text(
                   " ${info.couponexplain == '' ? "活动已过期" : info.couponexplain}",
@@ -718,12 +680,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
           width: ScreenUtil().setWidth(1440),
           child: DrawableStartText(
             lettersCountOfAfterImage: info.itemshorttitle.length,
-            assetImage: info.shoptype == "B"
-                ? "assets/icons/tianmao2.png"
-                : "assets/icons/taobao2.png",
+            assetImage:
+                info.shoptype == "B" ? "assets/icons/tianmao2.png" : "assets/icons/taobao2.png",
             text: " ${info.itemtitle}",
-            textStyle: new TextStyle(
-                fontSize: ScreenUtil().setSp(50), fontWeight: FontWeight.w400),
+            textStyle: new TextStyle(fontSize: ScreenUtil().setSp(50), fontWeight: FontWeight.w400),
           ),
         ),
         height: 20);
@@ -746,9 +706,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                 spans: <TextSpan>[
                   TextSpan(
                       text: "原价 ${info.itemprice}",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough))
+                      style: TextStyle(color: Colors.grey, decoration: TextDecoration.lineThrough))
                 ],
               ),
               FSuper(
@@ -804,8 +762,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
               shadowBlur: 4,
               textWeight: FontWeight.w600,
               padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(10),
-                  vertical: ScreenUtil().setHeight(5)),
+                  horizontal: ScreenUtil().setWidth(10), vertical: ScreenUtil().setHeight(5)),
             ),
           ],
         ),
@@ -824,8 +781,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
     return Container(
       child: child,
       margin: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().setWidth(50),
-          vertical: ScreenUtil().setHeight(height)),
+          horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(height)),
     );
   }
 
@@ -881,8 +837,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
                 color: Colors.black26.withOpacity(.3),
                 borderRadius: BorderRadius.all(Radius.circular(15))),
             padding: EdgeInsets.symmetric(
-                horizontal: ScreenUtil().setWidth(30),
-                vertical: ScreenUtil().setHeight(20)),
+                horizontal: ScreenUtil().setWidth(30), vertical: ScreenUtil().setHeight(20)),
             child: Text(
               "${curentSwaiperIndex + 1} / ${getImages().length}",
               style: TextStyle(color: Colors.white),
@@ -900,11 +855,10 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
       child: Container(
         key: _appbarGlogbalKey,
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
-        margin:
-            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+        margin: EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
         height: ScreenUtil().setHeight(200),
-        decoration: BoxDecoration(
-            color: Colors.white, boxShadow: [BoxShadow(color: Colors.black26)]),
+        decoration:
+            BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black26)]),
         child: Row(
           children: <Widget>[
             InkWell(
@@ -955,8 +909,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
   Container buildContainer({Widget swiper}) {
     return Container(
       height: ScreenUtil().setHeight(1340),
-      margin:
-          EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+      margin: EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
       child: swiper,
     );
   }
@@ -978,8 +931,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
 
   String getTimeStr(String timeMs) {
     if (timeMs.isNotEmpty) {
-      return DateUtils.instance
-          .getFormartDate(int.parse(timeMs), format: "yyyy-MM-dd");
+      return DateUtils.instance.getFormartDate(int.parse(timeMs), format: "yyyy-MM-dd");
     }
     return "未知";
   }
@@ -1013,7 +965,7 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
   }
 
   Future<String> initDatas() async {
-    await getHaodankuDetailInfo(widget.goodsId).then((res) {
+    await getHaodankuDetailInfo(widget.productId).then((res) {
       Result result = Result.fromJson(json.decode(res.toString()));
       if (result.code == 200) {
         HdkGoodsDetailModel hdkGoodsDetailModel =
@@ -1023,16 +975,14 @@ class _HaoDanKuDetailItemState extends State<HaoDanKuDetailItem>
           info = hdkGoodsDetailModel.info;
           videos = hdkGoodsDetailModel.video;
         });
-      }else{
+      } else {
         SystemToast.show(result.msg);
       }
     });
-    await post(Api.API_GET_SHOP_INFO, data: {"shopName": info.sellernick})
-        .then((res) {
+    await post(Api.API_GET_SHOP_INFO, data: {"shopName": info.sellernick}).then((res) {
       Result result = ResultUtils.format(res);
       if (result.code == 200) {
-        ShopInfo shopInfo =
-            ShopInfo.fromJson(json.decode(result.data.toString()));
+        ShopInfo shopInfo = ShopInfo.fromJson(json.decode(result.data.toString()));
         setState(() {
           _shopInfo = shopInfo;
         });

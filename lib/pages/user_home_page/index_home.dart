@@ -1,4 +1,3 @@
-import 'package:demo1/fluro/NavigatorUtil.dart';
 import 'package:demo1/pages/user_home_page/order/index.dart';
 import 'package:demo1/pages/user_home_page/widgets/list_item.dart';
 import 'package:demo1/pages/user_home_page/widgets/svg_title.dart';
@@ -6,10 +5,11 @@ import 'package:demo1/provider/user_provider.dart';
 import 'package:demo1/util/system_toast.dart';
 import 'package:demo1/util/user_utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 import 'header/index.dart';
 
 class UserIndexHome extends StatefulWidget {
@@ -39,10 +39,9 @@ class _IndexHomeState extends State<UserIndexHome> {
                     ListItem(
                       title: "订单绑定",
                       onTap: () async {
-                        await UserUtil.loadUserInfo().then((user){
-                          if(user!=null){
-                            NavigatorUtil.gotoOrderAddIndexPage(context);
-                          }else{
+                        await UserUtil.loadUserInfo().then((user) {
+                          if (user != null) {
+                          } else {
                             SystemToast.show("请先登录");
                           }
                         });
@@ -99,7 +98,6 @@ class _IndexHomeState extends State<UserIndexHome> {
                             svgPath: "assets/svg/dongtai.svg",
                             onTap: () {
                               dlog.dismiss();
-                              NavigatorUtil.goetoWhitePage(context);
                             }),
                         SvgTitle(title: "图文", svgPath: "assets/svg/tuwen.svg"),
                       ],
@@ -114,7 +112,6 @@ class _IndexHomeState extends State<UserIndexHome> {
       ),
     );
   }
-
 
   Widget _buildHeaderWidget() {
     Widget widget = HeaderIndex(userProvider.user);
